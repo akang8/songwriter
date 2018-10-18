@@ -52,6 +52,8 @@ namespace SongWriter.Logic.Services
                                                     .SingleOrDefault();
 
             Mapper.Map(model, dbModel);
+
+            this.context.AppData.SaveChanges();
         }
     }
 }

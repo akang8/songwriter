@@ -1,6 +1,7 @@
 ﻿using SongWriter.Data;
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using SongWriter.Logic.Services.Abstractions;
 
 namespace SongWriter.Logic
 {
@@ -18,6 +19,14 @@ namespace SongWriter.Logic
             get
             {
                 return this.services.GetService<AppDbContext>();
+            }
+        }
+
+        public IDocumentService Documents
+        {
+            get
+            {
+                return this.services.GetService<IDocumentService>();
             }
         }
     }
