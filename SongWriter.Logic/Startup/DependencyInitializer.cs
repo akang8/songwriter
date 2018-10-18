@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SongWriter.Logic.DependencyConfiguration
+namespace SongWriter.Logic.Startup
 {
     public static class DependencyInitializer
     {

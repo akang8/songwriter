@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SongWriter.Core;
-using SongWriter.Logic.DependencyConfiguration;
+using SongWriter.Logic.Startup;
+using System;
 using System.IO;
 
 namespace SongWriter.Web
@@ -20,7 +21,7 @@ namespace SongWriter.Web
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
             services.AddMvc()
@@ -29,8 +30,11 @@ namespace SongWriter.Web
             // Simple example with dependency injection for a data provider.
             services.AddSingleton<Providers.IWeatherProvider, Providers.WeatherProviderFake>();
 
-            //services.AddSongWriterLogic();
+            // Set up general logic DI, and specific data initializer
+            services.AddSongWriterLogic();
+            services.AddScoped<TestDataInitializer>();
 
+            // Set up configuration
             var configuration = new ConfigurationBuilder()
                                             .SetBasePath(Directory.GetCurrentDirectory())
                                             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -38,6 +42,14 @@ namespace SongWriter.Web
 
             services.Configure<AppConfiguration>(configuration)
                 .AddOptions();
+
+            // Data initialization
+            var provider = services.BuildServiceProvider();
+            var dataInitializer = provider.GetService<CoreDataInitializer>();
+
+            dataInitializer.Initialize();
+
+            return provider;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
