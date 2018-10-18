@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SongWriter.Core;
 using SongWriter.Logic.Startup;
+using System;
 using System.IO;
 
 namespace SongWriter.Logic.Tests.Integration
@@ -10,6 +11,7 @@ namespace SongWriter.Logic.Tests.Integration
     [TestClass]
     public class Startup
     {
+
         [AssemblyInitialize]
         public static void Initialize(TestContext testContext)
         {
@@ -35,6 +37,17 @@ namespace SongWriter.Logic.Tests.Integration
             var dataInitializer = provider.GetService<CoreDataInitializer>();
 
             dataInitializer.Initialize();
+
+            Services.SetServiceProvider(provider);
+        }
+
+        [TestMethod]
+        public void SmokeTest()
+        {
+            var context = Services.GetService<AppLogicContext>();
+
+            Assert.IsNotNull(context);
+            Assert.IsNotNull(context.Documents);
         }
     }
 }
