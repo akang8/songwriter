@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SongWriter.Core;
+using SongWriter.Logic.DependencyConfiguration;
+using System.IO;
 
 namespace SongWriter.Web
 {
@@ -25,6 +28,16 @@ namespace SongWriter.Web
 
             // Simple example with dependency injection for a data provider.
             services.AddSingleton<Providers.IWeatherProvider, Providers.WeatherProviderFake>();
+
+            //services.AddSongWriterLogic();
+
+            var configuration = new ConfigurationBuilder()
+                                            .SetBasePath(Directory.GetCurrentDirectory())
+                                            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                                            .Build();
+
+            services.Configure<AppConfiguration>(configuration)
+                .AddOptions();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
