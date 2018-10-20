@@ -17,5 +17,7 @@ namespace SongWriter.Logic.Services.Abstractions
         Document GetItem(int id);
 
         void Save(Document model);
+
+        void Remove(int id);
     }
 }

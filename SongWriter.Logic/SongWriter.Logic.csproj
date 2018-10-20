@@ -16,4 +16,8 @@
     <ProjectReference Include="..\SongWriter.Data\SongWriter.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Processing\" />
+  </ItemGroup>
+
 </Project>

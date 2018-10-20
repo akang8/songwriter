@@ -23,6 +23,7 @@ namespace SongWriter.Logic.Services
             // Map to data model, and add to db
             var dbModel = Mapper.Map<data.Document>(model);
             this.context.AppData.Add(dbModel);
+            this.context.AppData.SaveChanges();
 
             return dbModel.Id;
         }
@@ -48,11 +49,17 @@ namespace SongWriter.Logic.Services
         {
             var dbModel = this.context.AppData.Documents
                                                     .Where(d => d.Id == model.Id)
-                                                    .ProjectTo<Document>()
                                                     .SingleOrDefault();
 
             Mapper.Map(model, dbModel);
 
+            this.context.AppData.SaveChanges();
+        }
+
+        public void Remove(int id)
+        {
+            var dbItem = this.context.AppData.Documents.Find(id);
+            this.context.AppData.Remove(dbItem);
             this.context.AppData.SaveChanges();
         }
     }

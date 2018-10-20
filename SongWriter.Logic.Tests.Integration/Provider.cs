@@ -8,7 +8,7 @@ namespace SongWriter.Logic.Tests.Integration
     /// <summary>
     /// Encapsulates global service provider
     /// </summary>
-    public static class Services
+    public static class Provider
     {
         public static IServiceProvider ServiceProvider;
 
@@ -18,12 +18,9 @@ namespace SongWriter.Logic.Tests.Integration
             ServiceProvider = provider;
         }
 
-        /// <summary>
-        /// Convenience method to save a navigation property
-        /// </summary>
-        public static T GetService<T>()
+        public static AppLogicContext GetContext()
         {
-            return ServiceProvider.GetService<T>();
+            return ServiceProvider.GetService<AppLogicContext>();
         }
     }
 }

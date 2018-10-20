@@ -40,7 +40,7 @@ namespace SongWriter.Logic.Tests.Integration
 
             dataInitializer.Initialize();
 
-            Services.SetServiceProvider(provider);
+            Provider.SetServiceProvider(provider);
         }
 
         private static string GetTestDirectory()
@@ -58,7 +58,7 @@ namespace SongWriter.Logic.Tests.Integration
         [TestMethod]
         public void SmokeTest()
         {
-            var context = Services.GetService<AppLogicContext>();
+            var context = Provider.GetContext();
 
             Assert.IsNotNull(context);
             Assert.IsNotNull(context.Documents);
