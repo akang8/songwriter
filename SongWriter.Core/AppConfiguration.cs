@@ -4,6 +4,9 @@ using System.Text;
 
 namespace SongWriter.Core
 {
+    /// <summary>
+    /// Object representing the appsettings.json
+    /// </summary>
     public class AppConfiguration
     {
         public bool ResetData { get; set; }
