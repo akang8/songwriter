@@ -24,8 +24,10 @@ namespace SongWriter.Logic.Tests.Integration
             services.AddScoped<CoreDataInitializer>();
 
             // Set up configuration
+            string currentDirectory = GetTestDirectory();
+
             var configuration = new ConfigurationBuilder()
-                                            .SetBasePath(Directory.GetCurrentDirectory())
+                                            .SetBasePath(currentDirectory)
                                             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                                             .Build();
 
@@ -39,6 +41,18 @@ namespace SongWriter.Logic.Tests.Integration
             dataInitializer.Initialize();
 
             Services.SetServiceProvider(provider);
+        }
+
+        private static string GetTestDirectory()
+        {
+            // This is a bit of a hack but we walk up the directories until we get where we want
+            var currentDirectory = Directory.GetCurrentDirectory();
+            while (!currentDirectory.EndsWith("SongWriter.Logic.Tests.Integration"))
+            {
+                currentDirectory = Directory.GetParent(currentDirectory).FullName;
+            }
+
+            return currentDirectory;
         }
 
         [TestMethod]

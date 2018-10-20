@@ -15,6 +15,7 @@ namespace SongWriter.Logic.Startup
         public TestDataInitializer(AppLogicContext context, AppDbContext appData, IOptions<AppConfiguration> optionsConfiguration) 
             : base(appData, optionsConfiguration)
         {
+            this.context = context;
         }
 
         protected override void SeedData()
