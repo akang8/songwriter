@@ -15,6 +15,8 @@ namespace SongWriter.Logic.Startup
     {
         public static void AddSongWriterLogic(this IServiceCollection services)
         {
+            services.AddScoped<AppLogicContext>();
+
             services
                 .AddScoped<AppDbContext>()
                 .AddScoped(s =>

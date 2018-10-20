@@ -5,6 +5,13 @@ using SongWriter.Logic.Services.Abstractions;
 
 namespace SongWriter.Logic
 {
+    /// <summary>
+    /// Convenient way to access various services
+    /// </summary>
+    /// <remarks>
+    /// Analogous to existing pattern for EF DbSets in a DbContext, in this case
+    /// middle-tier serviecs are contained within a "logic" context.
+    /// </remarks>
     public class AppLogicContext
     {
 
