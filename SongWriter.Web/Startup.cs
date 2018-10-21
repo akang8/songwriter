@@ -27,8 +27,7 @@ namespace SongWriter.Web
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            // Simple example with dependency injection for a data provider.
-            services.AddSingleton<Providers.IWeatherProvider, Providers.WeatherProviderFake>();
+            MappingInitializer.Initialize();
 
             // Set up general logic DI, and specific data initializer
             services.AddSongWriterLogic();
@@ -45,7 +44,7 @@ namespace SongWriter.Web
 
             // Data initialization
             var provider = services.BuildServiceProvider();
-            var dataInitializer = provider.GetService<CoreDataInitializer>();
+            var dataInitializer = provider.GetService<TestDataInitializer>();
 
             dataInitializer.Initialize();
 
