@@ -10,6 +10,7 @@ namespace SongWriter.Logic.Tests
     [TestClass]
     public class TextManipulationsTest
     {
+        private static int EllipsisLength = 3;
         [TestMethod]
         public void CanCallShortenText()
         {
@@ -22,7 +23,7 @@ namespace SongWriter.Logic.Tests
             var limit = 50;
             var newText = TextManipulations.ShortenText(RandomValueGenerator.AlphaNumericText(100, 200), limit);
 
-            Assert.AreEqual(limit, newText.Length);
+            Assert.AreEqual(limit + EllipsisLength, newText.Length);
         }
 
         [TestMethod]
@@ -34,7 +35,7 @@ namespace SongWriter.Logic.Tests
 
             var newText = TextManipulations.ShortenText(text, limit);
 
-            Assert.AreEqual(spacePosition, newText.Length);
+            Assert.AreEqual(spacePosition + EllipsisLength, newText.Length);
         }
 
 

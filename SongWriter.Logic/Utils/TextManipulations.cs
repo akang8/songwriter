@@ -25,15 +25,10 @@ namespace SongWriter.Logic.Utils
             if (value.IndexOf(" ", length) == -1)
             {
                 // Return truncated despite no spaces
-                return value.Substring(0, length);
+                return $"{value.Substring(0, length)}...";
             }
 
-            return value.Substring(0, value.IndexOf(" ", length));
-        }
-
-        public static void TruncateAtWord(object randomValueGenerator)
-        {
-            throw new NotImplementedException();
+            return $"{value.Substring(0, value.IndexOf(" ", length))}...";
         }
     }
 }
