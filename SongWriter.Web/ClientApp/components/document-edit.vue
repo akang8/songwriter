@@ -1,14 +1,20 @@
 <template>
-    <div>
-        <h1>Edit Song #{{id}}</h1>
+    <div v-if="model">
+        <h1 v-once>
+            {{model.name}}
+        </h1>
         <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" v-model="model.name" />
         </div>
         <div class="form-group">
             <label>Text</label>
-            <textarea class="form-control" v-model="model.text"></textarea>
+            <textarea class="form-control" rows="10" v-model="model.text"></textarea>
         </div>
+
+        <p>
+            <a href="#" @click.prevent="saveDocument" class="btn btn-primary">Save</a>
+        </p>
     </div>
 </template>
 
@@ -16,33 +22,38 @@
     export default {
         data() {
             return {
-                model: {
-                    name: '',
-                    text: ''
-                }
+                model: null
             }
         },
-        props: {
-            id: {
-                type: Number,
-                required: true
-            }
-        },
+        props: ['id'],
         methods: {
-            async loadSong() {
+            async loadDocument() {
                 try {
-                    var result = await this.$http.get('/api/document')
+                    var result = await this.$http.get(`/api/document/${this.id}`)
                     if (result) {
-
+                        this.model = result.data;
                     }
                 } catch (err) {
                     window.alert(err)
                     console.log(err)
                 }
+            },
+            async saveDocument() {
+                try {
+                    var result = await this.$http.put(`/api/document`, this.model)
+                    if (result) {
+                        // TODO: Change to a toastr or something
+                        this.$router.push({name: 'Home'});
+                    }
+                } catch (err) {
+                    window.alert(err)
+                    console.log(err)
+                }
+
             }
         },
         async created() {
-
+            await this.loadDocument();
         }
     }
 </script>

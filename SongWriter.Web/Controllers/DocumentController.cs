@@ -12,6 +12,22 @@ namespace SongWriter.Web.Controllers
         public DocumentController(AppLogicContext context)
             : base(context) { }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var items = this.context.Documents.GetAll().ToList();
+
+            return Ok(items);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetItem(int id)
+        {
+            var model = this.context.Documents.GetItem(id);
+
+            return Ok(model);
+        }
+
         [HttpPost]
         public IActionResult Add([FromBody]Document document)
         {
@@ -20,12 +36,14 @@ namespace SongWriter.Web.Controllers
             return Ok(id);
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpPut]
+        public IActionResult Save([FromBody]Document document)
         {
-            var items = this.context.Documents.GetAll().ToList();
+            this.context.Documents.Save(document);
 
-            return Ok(items);
+            return Ok();
         }
+
+
     }
 }
