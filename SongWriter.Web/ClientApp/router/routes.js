@@ -8,6 +8,6 @@ export const routes = [
   { name: 'home', path: '/', component: HomePage, display: 'Home', icon: 'home' },
   { name: 'counter', path: '/counter', component: CounterExample, display: 'Counter', icon: 'graduation-cap' },
   { name: 'fetch-data', path: '/fetch-data', component: FetchData, display: 'Fetch data', icon: 'list' },
-  { name: 'DocumentCreate', path: '/document/create', component: DocumentCreate, display: 'Document - Create', icon: 'plus' },
-  { name: 'DocumentEdit', path: '/document/edit/:id', component: DocumentEdit, display: 'Document - Edit', icon: 'edit', props: true }
+  { name: 'DocumentCreate', path: '/document/create', component: DocumentCreate, display: 'Add Document', icon: 'plus-square' },
+  { name: 'DocumentEdit', path: '/document/edit/:id', component: DocumentEdit, display: 'Document - Edit', icon: 'edit', props: true, meta: { hideFromMenu: true } }
 ]
