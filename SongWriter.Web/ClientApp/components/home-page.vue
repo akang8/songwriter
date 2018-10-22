@@ -2,15 +2,22 @@
     <div>
         <h1>Song Writer</h1>
         <a href="#" @click.prevent="createSong" class="btn btn-primary"><icon :icon="['fas', 'plus-square']" /> Add Document</a>
-        {{documents}}
+        <div v-if="documents.length > 0">
+            <home-page-document-summary v-for="document in documents" :document="document" :key="document.id"></home-page-document-summary>
+        </div>
     </div>
 </template>
 <script>
+    import HomePageDocumentSummary from '@/components/home-page-document-summary';
+
     export default {
         data() {
             return {
                 documents: []
             }
+        },
+        components: {
+            HomePageDocumentSummary
         },
         methods: {
             createSong() {
