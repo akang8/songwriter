@@ -1,6 +1,6 @@
-import HomePage from 'components/home-page'
-import DocumentCreate from 'components/document-create'
-import DocumentEdit from 'components/document-edit'
+import HomePage from '@/components/home-page'
+import DocumentCreate from '@/components/document-create'
+import DocumentEdit from '@/components/document-edit'
 
 export const routes = [
   { name: 'Home', path: '/', component: HomePage, display: 'Home', icon: 'home' },

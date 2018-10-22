@@ -17,15 +17,10 @@ module.exports = () => {
             extensions: ['.js', '.vue'],
             alias: isDevBuild ? {
                     'vue$': 'vue/dist/vue',
-                    '@': path.resolve(__dirname, './ClientApp'),
-                    'components': path.resolve(__dirname, './ClientApp/components'),
-                    'views': path.resolve(__dirname, './ClientApp/views')
-                }
-                :
+                    '@': path.resolve(__dirname, './ClientApp')
+                }:
                 {
-                    '@': path.resolve(__dirname, './ClientApp'),
-                    'components': path.resolve(__dirname, './ClientApp/components'),
-                    'views': path.resolve(__dirname, './ClientApp/views')
+                    '@': path.resolve(__dirname, './ClientApp')
                 }
         },
         output: {
