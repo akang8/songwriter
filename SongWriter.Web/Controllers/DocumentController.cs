@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SongWriter.Logic;
+using SongWriter.Logic.Models;
 using SongWriter.Web.Infrastructure;
 
 namespace SongWriter.Web.Controllers
@@ -10,6 +11,14 @@ namespace SongWriter.Web.Controllers
     {
         public DocumentController(AppLogicContext context)
             : base(context) { }
+
+        [HttpPost]
+        public IActionResult Add([FromBody]Document document)
+        {
+            var id = this.context.Documents.Add(document);
+
+            return Ok(id);
+        }
 
         [HttpGet]
         public IActionResult GetAll()

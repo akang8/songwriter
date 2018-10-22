@@ -1,7 +1,7 @@
 <template>
     <div>
       <h1>Song Writer</h1>
-      <a href="#" @click="createSong" class="btn btn-primary">Create Song</a>
+      <a href="#" @click.prevent="createSong" class="btn btn-primary">Create Song</a>
     </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
     },
     methods: {
       createSong() {
-        console.log('Create song clicked');
+        this.$router.push({ name: 'DocumentCreate' });
       }
     }
 }
