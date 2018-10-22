@@ -17,9 +17,28 @@ namespace SongWriter.TestSupport
             return Random.Next(min, max);
         }
 
-        public static string @String(int minLength, int maxLength)
+        public static string AlphaNumericText(int length)
+        {
+            return AlphaNumericText(length, length);
+        }
+
+        public static string AlphaNumericText(int minLength, int maxLength)
         {
             var characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+            var length = Integer(minLength, maxLength);
+            var result = new StringBuilder(length);
+            for (int i = 0; i < length; i++)
+            {
+                result.Append(characters[Random.Next(characters.Length)]);
+            }
+            return result.ToString();
+        }
+
+        public static string AlphaNumericTextWithSpaces(int minLength, int maxLength)
+        {
+            // Allow characters and a few spaces to ensure that they get distributed among the generated string
+            var characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz       ";
 
             var length = Integer(minLength, maxLength);
             var result = new StringBuilder(length);

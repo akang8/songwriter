@@ -11,8 +11,8 @@ namespace SongWriter.TestSupport
         {
             return new Document()
             {
-                Name = RandomValueGenerator.String(10, 40),
-                Text = RandomValueGenerator.String(100, 500)
+                Name = RandomValueGenerator.AlphaNumericText(10, 40),
+                Text = RandomValueGenerator.AlphaNumericText(100, 500)
             };
         }
     }

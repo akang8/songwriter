@@ -128,7 +128,7 @@ namespace SongWriter.Logic.Tests.Integration.Services
 
             // Edit existing document name and save
             var document = context.Documents.GetItem(newId);
-            document.Name = RandomValueGenerator.String(10, 200);
+            document.Name = RandomValueGenerator.AlphaNumericText(10, 200);
             context.Documents.Save(document);
 
             // Get saved document and check values
@@ -146,7 +146,7 @@ namespace SongWriter.Logic.Tests.Integration.Services
 
             // Edit existing document name and save
             var document = context.Documents.GetItem(newId);
-            document.Text = RandomValueGenerator.String(200, 2000);
+            document.Text = RandomValueGenerator.AlphaNumericText(200, 2000);
             context.Documents.Save(document);
 
             // Get saved document and check values

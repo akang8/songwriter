@@ -10,5 +10,7 @@ namespace SongWriter.Logic.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public string SummaryText { get; set; }
     }
 }
