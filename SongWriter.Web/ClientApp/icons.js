@@ -12,10 +12,9 @@ fontawesome.library.add(
   require('@fortawesome/fontawesome-free-solid/faList'),
   require('@fortawesome/fontawesome-free-solid/faSpinner'),
   require('@fortawesome/fontawesome-free-solid/faPlusSquare'),
-  require('@fortawesome/fontawesome-free-solid/faEdit'),
+  require('@fortawesome/fontawesome-free-solid/faMusic'),
   // Brands
   require('@fortawesome/fontawesome-free-brands/faFontAwesome'),
-  require('@fortawesome/fontawesome-free-brands/faMicrosoft'),
   require('@fortawesome/fontawesome-free-brands/faVuejs')
 )
 
