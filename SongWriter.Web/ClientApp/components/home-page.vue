@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Song Writer</h1>
-        <a href="#" @click.prevent="createSong" class="btn btn-primary">Create Song</a>
+        <a href="#" @click.prevent="createSong" class="btn btn-primary"><icon :icon="['fas', 'plus-square']" /> Add Document</a>
     </div>
 </template>
 <script>
