@@ -14,5 +14,12 @@ namespace SongWriter.TestSupport
             Assert.AreEqual(expected.Name, actual.Name);
             Assert.AreEqual(expected.Text, actual.Text);
         }
+
+        public static void AreEqual(Document expected, DocumentSummary actual)
+        {
+            Assert.AreEqual(expected.Id, actual.Id);
+            Assert.AreEqual(expected.Name, actual.Name);
+        }
+
     }
 }

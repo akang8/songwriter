@@ -28,9 +28,9 @@ namespace SongWriter.Logic.Services
             return dbModel.Id;
         }
 
-        public IEnumerable<Document> GetAll()
+        public IEnumerable<DocumentSummary> GetAll()
         {
-            var items = this.context.AppData.Documents.ProjectTo<Document>();
+            var items = this.context.AppData.Documents.ProjectTo<DocumentSummary>();
 
             return items;
         }
