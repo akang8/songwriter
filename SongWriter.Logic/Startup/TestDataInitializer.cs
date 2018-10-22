@@ -22,8 +22,40 @@ namespace SongWriter.Logic.Startup
         {
             context.Documents.Add(new Document()
             {
-                Name = "Some Document",
-                Text = "This is some initial text"
+                Name = "Mary Had A Little Lamb",
+                Text = @"Mary had a little lamb, little lamb, little lamb
+Mary had a little lamb
+Whose fleece was white as snow.
+
+And everywhere that Mary went
+Mary went,
+                Mary went,
+                Everywhere that Mary went
+The lamb was sure to go."
+            });
+
+            context.Documents.Add(new Document()
+            {
+                Name = "Twinkle, Twinkle, Little Star",
+                Text = @"Twinkle, twinkle, little star,
+How I wonder what you are!
+Up above the world so high,
+Like a diamond in the sky.
+
+When this blazing sun is gone,
+When he nothing shines upon,
+Then you show your little light,
+Twinkle, twinkle, through the night."
+            });
+
+
+            context.Documents.Add(new Document()
+            {
+                Name = "Peter Piper",
+                Text = @"Peter Piper picked a peck of pickled peppers.
+A peck of pickled peppers Peter Piper picked.
+If Peter Piper picked a peck of pickled peppers,
+Where's the peck of pickled peppers Peter Piper picked?"
             });
         }
     }
