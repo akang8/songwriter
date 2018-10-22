@@ -3,7 +3,7 @@
         <div class="card-body">
             <h4 class="card-title">{{document.name}}</h4>
             <p class="card-text">{{document.summaryText}}</p>
-            <a href="#" class="btn btn-primary">Edit</a>
+            <router-link :to="{ name: 'DocumentEdit', params: { id: document.id }}" class="btn btn-primary">Edit</router-link>
         </div>
     </div>
 </template>
