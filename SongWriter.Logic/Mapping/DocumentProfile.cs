@@ -14,7 +14,8 @@ namespace SongWriter.Logic.Mapping
         {
             this.CreateMap<data.Document, Document>();
             this.CreateMap<Document, data.Document>()
-                    .ForMember(m => m.User, o => o.Ignore());
+                    .ForMember(m => m.User, o => o.Ignore())
+                    .ForMember(m => m.UserId, o => o.Ignore());
         }
     }
 }

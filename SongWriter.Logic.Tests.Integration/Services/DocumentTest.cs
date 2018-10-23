@@ -11,6 +11,17 @@ namespace SongWriter.Logic.Tests.Integration.Services
     [TestClass]
     public class DocumentTest
     {
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext testContext)
+        {
+            var context = Provider.GetContext();
+            var userName = RandomValueGenerator.AlphaNumericText(5, 10);
+
+            var userId = context.Users.Register(userName, RandomValueGenerator.AlphaNumericText(10, 20));
+
+            Provider.Login(userId, userName);
+        }
+
         [TestMethod]
         public void CanAccessDocumentService()
         {

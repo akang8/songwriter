@@ -22,6 +22,8 @@ namespace SongWriter.Logic.Services
         {
             // Map to data model, and add to db
             var dbModel = Mapper.Map<data.Document>(model);
+            dbModel.UserId = this.context.UserId;
+            
             this.context.AppData.Add(dbModel);
             this.context.AppData.SaveChanges();
 
@@ -30,15 +32,20 @@ namespace SongWriter.Logic.Services
 
         public IEnumerable<DocumentSummary> GetAll()
         {
-            var items = this.context.AppData.Documents.ProjectTo<DocumentSummary>();
+            var userId = this.context.UserId;
+            var items = this.context.AppData.Documents
+                                            .Where(d => d.UserId == userId)
+                                            .ProjectTo<DocumentSummary>();
 
             return items;
         }
 
         public Document GetItem(int id)
         {
+            var userId = this.context.UserId;
             var model = this.context.AppData.Documents
-                                                    .Where(d => d.Id == id)
+                                                    .Where(d => d.Id == id
+                                                            && d.UserId == userId)
                                                     .ProjectTo<Document>()
                                                     .SingleOrDefault();
 
@@ -47,9 +54,16 @@ namespace SongWriter.Logic.Services
 
         public void Save(Document model)
         {
+            var userId = this.context.UserId;
             var dbModel = this.context.AppData.Documents
-                                                    .Where(d => d.Id == model.Id)
+                                                    .Where(d => d.Id == model.Id
+                                                            && d.UserId == userId)
                                                     .SingleOrDefault();
+
+            if(dbModel == null)
+            {
+                throw new InvalidOperationException("Cannot find item to update");
+            }
 
             Mapper.Map(model, dbModel);
 
@@ -58,7 +72,11 @@ namespace SongWriter.Logic.Services
 
         public void Remove(int id)
         {
-            var dbItem = this.context.AppData.Documents.Find(id);
+            var userId = this.context.UserId;
+            var dbItem = this.context.AppData.Documents
+                                                    .Where(d => d.Id == id
+                                                            && d.UserId == userId)
+                                                    .SingleOrDefault();
             this.context.AppData.Remove(dbItem);
             this.context.AppData.SaveChanges();
         }

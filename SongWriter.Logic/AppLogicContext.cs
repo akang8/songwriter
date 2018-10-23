@@ -48,6 +48,22 @@ namespace SongWriter.Logic
             }
         }
 
+        public int UserId
+        {
+            get
+            {
+                var user = this.Identifier.Identify();
+                if(user != null)
+                {
+                    return user.Id;
+                }
+
+                // Is this the best thing to do here?
+                return 0;
+            }
+        }
+
+
         public IDocumentService Documents
         {
             get
