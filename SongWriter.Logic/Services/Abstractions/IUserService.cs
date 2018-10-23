@@ -9,7 +9,15 @@ namespace SongWriter.Logic.Services.Abstractions
     {
         int Register(string userName, string password);
 
-        void UpdatePassword(string userName, string oldPassword, string newPassword);
+        /// <summary>
+        /// Update user name
+        /// </summary>
+        /// <remarks>
+        /// Assumes user service knows current user
+        /// </remarks>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        void UpdatePassword(string oldPassword, string newPassword);
 
         bool Authenticate(string userName, string attemptedPassword);
 

@@ -72,9 +72,10 @@ namespace SongWriter.Logic.Services
             return user.Id;
         }
 
-        public void UpdatePassword(string userName, string oldPassword, string newPassword)
+        public void UpdatePassword(string oldPassword, string newPassword)
         {
             var oldPasswordHashed = this.hasher.Hash(oldPassword);
+            var userName = this.context.UserName;
             var user = this.context.AppData.Users
                                                 .Where(u => u.Name == userName
                                                         && u.Password == oldPasswordHashed)                                                

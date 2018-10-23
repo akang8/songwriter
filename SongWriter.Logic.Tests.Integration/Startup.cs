@@ -2,7 +2,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SongWriter.Core;
+using SongWriter.Logic.Processing;
+using SongWriter.Logic.Processing.Abstractions;
 using SongWriter.Logic.Startup;
+using SongWriter.TestSupport;
 using System;
 using System.IO;
 
@@ -34,13 +37,21 @@ namespace SongWriter.Logic.Tests.Integration
             services.Configure<AppConfiguration>(configuration)
                 .AddOptions();
 
+
+            // Set initial identity
+            var userIdentifier = new SimpleUserIdentifier()
+            {
+                Id = RandomValueGenerator.Integer(1, 1000),
+                Name = RandomValueGenerator.AlphaNumericText(5, 20)
+            };
+            services.AddSingleton<IUserIdentifier>(userIdentifier);
+
             // Data initialization
             var provider = services.BuildServiceProvider();
             var dataInitializer = provider.GetService<CoreDataInitializer>();
 
             dataInitializer.Initialize();
-
-            Provider.SetServiceProvider(provider);
+            Provider.Setup(provider, userIdentifier);
         }
 
         private static string GetTestDirectory()

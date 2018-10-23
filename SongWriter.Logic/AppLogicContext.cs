@@ -2,6 +2,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using SongWriter.Logic.Services.Abstractions;
+using SongWriter.Logic.Processing.Abstractions;
 
 namespace SongWriter.Logic
 {
@@ -26,6 +27,24 @@ namespace SongWriter.Logic
             get
             {
                 return this.services.GetService<AppDbContext>();
+            }
+        }
+
+        public IUserIdentifier Identifier
+        {
+            get
+            {
+                var identifier = this.services.GetService<IUserIdentifier>();
+
+                return identifier;
+            }
+        }
+
+        public string UserName
+        {
+            get
+            {
+                return this.Identifier.Identify()?.Name;
             }
         }
 
