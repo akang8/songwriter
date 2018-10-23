@@ -18,5 +18,10 @@ namespace SongWriter.Data.Models
 
         [MaxLength]
         public string Text { get; set; }
+
+        /// <summary>
+        /// User that owns this document
+        /// </summary>
+        public User User { get; set; }
     }
 }
