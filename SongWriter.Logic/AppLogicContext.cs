@@ -36,5 +36,13 @@ namespace SongWriter.Logic
                 return this.services.GetService<IDocumentService>();
             }
         }
+
+        public IUserService Users
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }
