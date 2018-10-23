@@ -7,6 +7,6 @@ namespace SongWriter.Logic.Processing.Abstractions
 {
     public interface IUserIdentifier
     {
-        string Identify();
+        User Identify();
     }
 }

@@ -28,8 +28,14 @@ namespace SongWriter.Logic.Tests.Integration
             return ServiceProvider.GetService<AppLogicContext>();
         }
 
-        public static void SimulateLogin(string userName)
+        public static void SimulateLogin(User user)
         {
+            SimulateLogin(user.Id, user.Name);
+        }
+
+        public static void SimulateLogin(int id, string userName)
+        {
+            UserIdentifier.Id = id;
             UserIdentifier.Name = userName;
         }
     }

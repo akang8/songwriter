@@ -39,7 +39,11 @@ namespace SongWriter.Logic.Tests.Integration
 
 
             // Set initial identity
-            var userIdentifier = new SimpleUserIdentifier();
+            var userIdentifier = new SimpleUserIdentifier()
+            {
+                Id = RandomValueGenerator.Integer(1, 1000),
+                Name = RandomValueGenerator.AlphaNumericText(5, 20)
+            };
             services.AddSingleton<IUserIdentifier>(userIdentifier);
 
             // Data initialization
