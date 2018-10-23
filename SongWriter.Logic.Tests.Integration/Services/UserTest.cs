@@ -114,7 +114,7 @@ namespace SongWriter.Logic.Tests.Integration.Services
             var id = context.Users.Register(userName, password);
 
             // Pretend to sign in
-            Provider.SimulateLogin(id, userName);
+            Provider.Login(id, userName);
 
             context.Users.UpdatePassword(password, newPassword);
 

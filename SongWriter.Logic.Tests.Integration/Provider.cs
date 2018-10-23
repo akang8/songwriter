@@ -28,15 +28,24 @@ namespace SongWriter.Logic.Tests.Integration
             return ServiceProvider.GetService<AppLogicContext>();
         }
 
-        public static void SimulateLogin(User user)
+        public static void Login(User user)
         {
-            SimulateLogin(user.Id, user.Name);
+            Login(user.Id, user.Name);
         }
 
-        public static void SimulateLogin(int id, string userName)
+        public static void Login(int id, string userName)
         {
-            UserIdentifier.Id = id;
-            UserIdentifier.Name = userName;
+            // Should we prevent the tests from logging in when User is already set?
+            UserIdentifier.User = new User()
+            {
+                Id = id,
+                Name = userName
+            };
+        }
+
+        public static void Logout()
+        {
+            UserIdentifier.User = null;
         }
     }
 }

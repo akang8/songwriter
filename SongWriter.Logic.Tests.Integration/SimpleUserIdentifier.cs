@@ -11,17 +11,11 @@ namespace SongWriter.Logic.Tests.Integration
     /// </summary>
     public class SimpleUserIdentifier : IUserIdentifier
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
+        public User User { get; set; }
 
         public User Identify()
         {
-            return new User()
-            {
-                Id = this.Id,
-                Name = this.Name
-            };
+            return this.User;
         }
     }
 }
