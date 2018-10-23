@@ -41,7 +41,7 @@ namespace SongWriter.Logic
         {
             get
             {
-                throw new NotImplementedException();
+                return this.services.GetService<IUserService>();
             }
         }
     }

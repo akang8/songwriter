@@ -11,12 +11,10 @@ namespace SongWriter.Logic.Services.Abstractions
 
         void UpdatePassword(string userName, string oldPassword, string newPassword);
 
-        int Remove(string userName);
-
-        bool Authenticate(string userName, string password);
+        bool Authenticate(string userName, string attemptedPassword);
 
         User GetItem(int id);
 
-        User GetItem(string name);
+        User GetItem(string userName);
     }
 }

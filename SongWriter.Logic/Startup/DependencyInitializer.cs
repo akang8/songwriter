@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using SongWriter.Core;
 using SongWriter.Data;
+using SongWriter.Logic.Processing;
+using SongWriter.Logic.Processing.Abstractions;
 using SongWriter.Logic.Services;
 using SongWriter.Logic.Services.Abstractions;
 using System;
@@ -28,7 +30,12 @@ namespace SongWriter.Logic.Startup
                     return dbOptionsBuilder.Options;
                 });
 
+            // Services
             services.AddScoped<IDocumentService, DocumentService>();
+            services.AddScoped<IUserService, UserService>();
+
+            // Processing
+            services.AddScoped<IHasher, NonHasher>();
         }
     }
 }

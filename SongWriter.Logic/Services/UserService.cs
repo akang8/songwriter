@@ -1,41 +1,89 @@
-﻿using SongWriter.Logic.Models;
+﻿using AutoMapper.QueryableExtensions;
+using SongWriter.Logic.Models;
+using SongWriter.Logic.Processing.Abstractions;
 using SongWriter.Logic.Services.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using data = SongWriter.Data.Models;
 
 namespace SongWriter.Logic.Services
 {
     public class UserService : IUserService
     {
-        public bool Authenticate(string userName, string password)
+        private readonly AppLogicContext context;
+        private readonly IHasher hasher;
+
+        public UserService(AppLogicContext context, IHasher hasher)
         {
-            throw new NotImplementedException();
+            this.context = context;
+            this.hasher = hasher;
+        }
+
+        public bool Authenticate(string userName, string attemptedPassword)
+        {
+            var attemptedPasswordHash = this.hasher.Hash(attemptedPassword);
+            var count = this.context.AppData.Users
+                                                .Where(u => u.Name == userName
+                                                        && u.Password == attemptedPasswordHash)
+                                                .Count();
+
+            // TODO: what to do if there is more than 1 record returned?
+            if(count == 1)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public User GetItem(int id)
         {
-            throw new NotImplementedException();
+            var user = this.context.AppData.Users
+                                                .Where(u => u.Id == id)
+                                                .ProjectTo<User>()
+                                                .SingleOrDefault();
+
+            return user;
         }
 
-        public User GetItem(string name)
+        public User GetItem(string userName)
         {
-            throw new NotImplementedException();
+            var user = this.context.AppData.Users
+                                                .Where(u => u.Name == userName)
+                                                .ProjectTo<User>()
+                                                .SingleOrDefault();
+
+            return user;
         }
 
         public int Register(string userName, string password)
         {
-            throw new NotImplementedException();
-        }
+            var user = new data.User()
+            {
+                Name = userName,
+                Password = this.hasher.Hash(password)
+            };
 
-        public int Remove(string userName)
-        {
-            throw new NotImplementedException();
+            this.context.AppData.Add(user);
+            this.context.AppData.SaveChanges();
+
+            return user.Id;
         }
 
         public void UpdatePassword(string userName, string oldPassword, string newPassword)
         {
-            throw new NotImplementedException();
+            var oldPasswordHashed = this.hasher.Hash(oldPassword);
+            var user = this.context.AppData.Users
+                                                .Where(u => u.Name == userName
+                                                        && u.Password == oldPasswordHashed)                                                
+                                                .SingleOrDefault();
+
+            // Update password
+            user.Password = this.hasher.Hash(newPassword);
+
+            this.context.AppData.SaveChanges();
         }
     }
 }
