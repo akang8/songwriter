@@ -7,21 +7,15 @@ using System.Text;
 namespace SongWriter.Logic.Tests.Integration
 {
     /// <summary>
-    /// Simple, dumb identifier. Returns the Id/Name set in the class
+    /// Simple, dumb identifier. Returns the Name set in the class
     /// </summary>
     public class SimpleUserIdentifier : IUserIdentifier
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
-        public User Identify()
+        public string Identify()
         {
-            return new User()
-            {
-                Id = this.Id,
-                Name = this.Name
-            };
+            return this.Name;
         }
     }
 }

@@ -44,7 +44,7 @@ namespace SongWriter.Logic
         {
             get
             {
-                return this.Identifier.Identify()?.Name;
+                return this.Identifier.Identify();
             }
         }
 
