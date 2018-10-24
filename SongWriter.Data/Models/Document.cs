@@ -14,7 +14,7 @@ namespace SongWriter.Data.Models
     {
         public int Id { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(300)]
         public string Name { get; set; }
 
         [MaxLength]
