@@ -14,19 +14,9 @@ namespace SongWriter.Logic.Processing
     /// </remarks>
     public class NonHasher : IHasher
     {
-        public bool AreEqual(string hashedSource, string text)
-        {
-            if (hashedSource.Equals(text))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         public string Hash(string text)
         {
-            return text;
+            return text + "xyz";
         }
     }
 }

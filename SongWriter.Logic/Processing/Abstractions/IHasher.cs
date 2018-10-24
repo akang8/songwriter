@@ -7,7 +7,5 @@ namespace SongWriter.Logic.Processing.Abstractions
     public interface IHasher
     {
         string Hash(string text);
-
-        bool AreEqual(string hashedSource, string text);
     }
 }
