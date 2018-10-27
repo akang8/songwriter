@@ -20,6 +20,21 @@ namespace SongWriter.Logic.Startup
 
         protected override void SeedData()
         {
+            this.AddUsers();
+        }
+
+        private void AddUsers()
+        {
+            var userNames = new string[] { "arthur", "john", "jane" };
+            foreach(var userName in userNames)
+            {
+                var userId = context.Users.Register(userName, $"{userName}1");
+                this.AddDocuments(userId);
+            }
+        }
+
+        private void AddDocuments(int userId)
+        {
             context.Documents.Add(new Document()
             {
                 Name = "Mary Had A Little Lamb",
@@ -32,7 +47,7 @@ Mary went,
                 Mary went,
                 Everywhere that Mary went
 The lamb was sure to go."
-            });
+            }, userId);
 
             context.Documents.Add(new Document()
             {
@@ -46,7 +61,7 @@ When this blazing sun is gone,
 When he nothing shines upon,
 Then you show your little light,
 Twinkle, twinkle, through the night."
-            });
+            }, userId);
 
 
             context.Documents.Add(new Document()
@@ -56,7 +71,7 @@ Twinkle, twinkle, through the night."
 A peck of pickled peppers Peter Piper picked.
 If Peter Piper picked a peck of pickled peppers,
 Where's the peck of pickled peppers Peter Piper picked?"
-            });
+            }, userId);
         }
     }
 }

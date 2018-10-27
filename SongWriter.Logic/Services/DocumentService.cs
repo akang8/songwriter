@@ -30,6 +30,19 @@ namespace SongWriter.Logic.Services
             return dbModel.Id;
         }
 
+        public int Add(Document model, int userId)
+        {
+            // Not ideal, but quickest way to seed data for a specific user
+            var dbModel = Mapper.Map<data.Document>(model);
+            dbModel.UserId = userId;
+
+            this.context.AppData.Add(dbModel);
+            this.context.AppData.SaveChanges();
+
+            return dbModel.Id;
+        }
+
+
         public IEnumerable<DocumentSummary> GetAll()
         {
             var userId = this.context.UserId;
