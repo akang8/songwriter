@@ -9,10 +9,10 @@ namespace SongWriter.Web.Infrastructure
 {
     public class AppControllerBase : Controller
     {
-        protected readonly AppLogicContext context;
+        protected readonly AppLogicContext appContext;
         public AppControllerBase(AppLogicContext context)
         {
-            this.context = context;
+            this.appContext = context;
         }
     }
 }

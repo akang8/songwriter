@@ -1,11 +1,15 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SongWriter.Core;
+using SongWriter.Logic.Processing.Abstractions;
 using SongWriter.Logic.Startup;
+using SongWriter.Web.Infrastructure;
 using System;
 using System.IO;
 
@@ -27,6 +31,14 @@ namespace SongWriter.Web
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                            .AddCookie(o => o.LoginPath = new PathString("/account/login"));
+
+            return ConfigureSongWriterServices(services);
+        }
+
+        private static IServiceProvider ConfigureSongWriterServices(IServiceCollection services)
+        {
             MappingInitializer.Initialize();
 
             // Set up general logic DI, and specific data initializer
@@ -41,6 +53,11 @@ namespace SongWriter.Web
 
             services.Configure<AppConfiguration>(configuration)
                 .AddOptions();
+
+            // Set initial identity/http context
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IUserIdentifier, WebUserIdentifier>();
+
 
             // Data initialization
             var provider = services.BuildServiceProvider();
@@ -70,6 +87,7 @@ namespace SongWriter.Web
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

@@ -25,7 +25,7 @@ namespace SongWriter.Logic.Startup
 
         private void AddUsers()
         {
-            var userNames = new string[] { "arthur", "john", "jane" };
+            var userNames = new string[] { "john", "jane" };
             foreach(var userName in userNames)
             {
                 var userId = context.Users.Register(userName, $"{userName}1");

@@ -15,7 +15,7 @@ namespace SongWriter.Web.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var items = this.context.Documents.GetAll().ToList();
+            var items = this.appContext.Documents.GetAll().ToList();
 
             return Ok(items);
         }
@@ -23,7 +23,7 @@ namespace SongWriter.Web.Controllers
         [HttpGet("{id}")]
         public IActionResult GetItem(int id)
         {
-            var model = this.context.Documents.GetItem(id);
+            var model = this.appContext.Documents.GetItem(id);
 
             return Ok(model);
         }
@@ -31,7 +31,7 @@ namespace SongWriter.Web.Controllers
         [HttpPost]
         public IActionResult Add([FromBody]Document document)
         {
-            var id = this.context.Documents.Add(document);
+            var id = this.appContext.Documents.Add(document);
 
             return Ok(id);
         }
@@ -39,7 +39,7 @@ namespace SongWriter.Web.Controllers
         [HttpPut]
         public IActionResult Save([FromBody]Document document)
         {
-            this.context.Documents.Save(document);
+            this.appContext.Documents.Save(document);
 
             return Ok();
         }

@@ -19,9 +19,26 @@
         components: {
             HomePageDocumentSummary
         },
+        async created() {
+            await this.loginUser();
+            // Fire and forget, no need for await here?
+            this.loadDocuments();
+        },
         methods: {
             createSong() {
                 this.$router.push({ name: 'DocumentCreate' });
+            },
+            async loginUser() {
+                // HACK: login write away from now
+                try {
+                    var result = await this.$http.post('/api/account', { userName: "john", password: "john1" })
+                    if (result) {
+                        console.log(result);
+                    }
+                } catch (err) {
+                    window.alert(err)
+                    console.log(err)
+                }
             },
             async loadDocuments() {
                 try {
@@ -34,10 +51,6 @@
                     console.log(err)
                 }
             }
-        },
-        async created() {
-            // Fire and forget, no need for await here?
-            this.loadDocuments();
         }
     }
 </script>
