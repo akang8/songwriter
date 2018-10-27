@@ -29,7 +29,7 @@
                 this.$router.push({ name: 'DocumentCreate' });
             },
             async loginUser() {
-                // HACK: login write away from now
+                // HACK: login right away from now
                 try {
                     var result = await this.$http.post('/api/account', { userName: "john", password: "john1" })
                     if (result) {
