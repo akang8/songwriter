@@ -12,6 +12,7 @@ using SongWriter.Logic.Startup;
 using SongWriter.Web.Infrastructure;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace SongWriter.Web
 {
@@ -33,6 +34,15 @@ namespace SongWriter.Web
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                             .AddCookie(o => o.LoginPath = new PathString("/account/login"));
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    context.Response.StatusCode = 403;
+                    return Task.CompletedTask;
+                };
+            });
 
             return ConfigureSongWriterServices(services);
         }
