@@ -166,6 +166,33 @@ namespace SongWriter.Logic.Tests.Integration.Services
         }
 
         [TestMethod]
+        public void CanSaveDocumentFolder()
+        {
+            var context = Provider.GetContext();
+
+            // Add some more folders
+            var newFolderIds = new List<int>();
+            for(var i = 0; i < RandomValueGenerator.Integer(2, 5); i++)
+            {
+                var newFolderId = context.Folders.Add(ModelGenerator.Folder());
+
+                newFolderIds.Add(newFolderId);
+            }
+
+            var newId = context.Documents.Add(ModelGenerator.Document(FolderId));
+
+            // Edit existing document name and save
+            var document = context.Documents.GetItem(newId);
+            document.FolderId = newFolderIds.RandomItem();
+            context.Documents.Save(document);
+
+            // Get saved document and check values
+            var savedDocument = context.Documents.GetItem(newId);
+
+            ModelAssert.AreEqual(document, savedDocument);
+        }
+
+        [TestMethod]
         public void CanCallRemoveDocument()
         {
             var context = Provider.GetContext();
