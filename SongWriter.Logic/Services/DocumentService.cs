@@ -35,6 +35,15 @@ namespace SongWriter.Logic.Services
             return items;
         }
 
+        public IEnumerable<DocumentSummary> GetSummaries(int folderId)
+        {
+            var items = this.context.AppData.Documents
+                                                .Where(d => d.FolderId == folderId)
+                                                .ProjectTo<DocumentSummary>();
+
+            return items;
+        }
+
         public Document GetItem(int id)
         {
             var model = this.context.AppData.Documents

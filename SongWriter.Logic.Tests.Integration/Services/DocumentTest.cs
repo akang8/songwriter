@@ -109,12 +109,82 @@ namespace SongWriter.Logic.Tests.Integration.Services
             {
                 var savedItem = savedItems.Where(i => i.Id == newDocument.Id).SingleOrDefault();
 
-                Assert.IsNotNull(savedItems);
+                Assert.IsNotNull(savedItem);
 
                 ModelAssert.AreEqual(newDocument, savedItem);
             }
         }
 
+        [TestMethod]
+        public void CanGetAllDocumentsForFolder()
+        {
+            var context = Provider.GetContext();
+
+            var newFolderId = context.Folders.Add(ModelGenerator.Folder());
+
+            var previousItemsCount = context.Documents.GetSummaries(newFolderId).Count();
+            var newItemsCount = RandomValueGenerator.Integer(5, 10);
+
+            // Add random document and add to get its DB id
+            var newDocuments = new List<Document>();
+            for (var i = 0; i < newItemsCount; i++)
+            {
+                var document = ModelGenerator.Document(newFolderId);
+                document.Id = context.Documents.Add(document);
+
+                newDocuments.Add(document);
+            }
+
+            var savedItems = context.Documents.GetSummaries(newFolderId);
+
+            var currentItemsCount = savedItems.Count();
+
+            // Check to see if number of items retrieved matches
+            Assert.AreEqual(previousItemsCount + newItemsCount, currentItemsCount);
+
+            // Check if items retreived have correct values
+            foreach (var newDocument in newDocuments)
+            {
+                var savedItem = savedItems
+                                    .Where(i => i.Id == newDocument.Id)
+                                    .SingleOrDefault();
+
+                Assert.IsNotNull(savedItem);
+
+                ModelAssert.AreEqual(newDocument, savedItem);
+            }
+        }
+
+        [TestMethod]
+        public void CannotGetDocumentsForIncorrectFolder()
+        {
+            var context = Provider.GetContext();
+
+            var newFolderId = context.Folders.Add(ModelGenerator.Folder());
+
+            // Add random document and add to get its DB id
+            var newDocuments = new List<Document>();
+            for (var i = 0; i < RandomValueGenerator.Integer(5, 10); i++)
+            {
+                var document = ModelGenerator.Document(newFolderId);
+                document.Id = context.Documents.Add(document);
+
+                newDocuments.Add(document);
+            }
+
+            // Get items from old folder
+            var savedItems = context.Documents.GetSummaries(FolderId).ToList();
+
+            // Check that item for another folder is not retrieved
+            foreach (var newDocument in newDocuments)
+            {
+                var savedItem = savedItems
+                                    .Where(i => i.Id == newDocument.Id)
+                                    .SingleOrDefault();
+
+                Assert.IsNull(savedItem);
+            }
+        }
 
         [TestMethod]
         public void CanCallSaveDocument()
