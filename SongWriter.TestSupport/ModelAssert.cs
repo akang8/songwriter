@@ -21,5 +21,11 @@ namespace SongWriter.TestSupport
             Assert.AreEqual(expected.Name, actual.Name);
         }
 
+        public static void AreEqual(Folder expected, Folder actual)
+        {
+            Assert.AreEqual(expected.Id, actual.Id);
+            Assert.AreEqual(expected.Name, actual.Name);
+        }
+
     }
 }

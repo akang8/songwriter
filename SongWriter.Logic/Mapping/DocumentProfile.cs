@@ -13,7 +13,8 @@ namespace SongWriter.Logic.Mapping
         public DocumentProfile()
         {
             this.CreateMap<data.Document, Document>();
-            this.CreateMap<Document, data.Document>();
+            this.CreateMap<Document, data.Document>()
+                            .ForMember(m => m.Folder, o => o.Ignore());
         }
     }
 }

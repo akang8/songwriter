@@ -15,7 +15,7 @@ namespace SongWriter.Web.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var items = this.context.Documents.GetAll().ToList();
+            var items = this.context.Documents.GetSummaries().ToList();
 
             return Ok(items);
         }

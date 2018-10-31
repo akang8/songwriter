@@ -11,6 +11,16 @@ namespace SongWriter.Logic.Tests.Integration.Services
     [TestClass]
     public class DocumentTest
     {
+        public static int FolderId;
+
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext testContext)
+        {
+            var context = Provider.GetContext();
+
+            DocumentTest.FolderId = context.Folders.Add(ModelGenerator.Folder());
+        }
+
         [TestMethod]
         public void CanAccessDocumentService()
         {
@@ -24,7 +34,7 @@ namespace SongWriter.Logic.Tests.Integration.Services
         {
             var context = Provider.GetContext();
 
-            var document = ModelGenerator.Document();
+            var document = ModelGenerator.Document(FolderId);
 
             var newId = context.Documents.Add(document);
 
@@ -37,7 +47,7 @@ namespace SongWriter.Logic.Tests.Integration.Services
             var context = Provider.GetContext();
 
             // Add random document and add to get its DB id
-            var document = ModelGenerator.Document();
+            var document = ModelGenerator.Document(FolderId);
             var newId = context.Documents.Add(document);
 
             // See if that id will return an object
@@ -52,7 +62,7 @@ namespace SongWriter.Logic.Tests.Integration.Services
             var context = Provider.GetContext();
 
             // Add random document and add to get its DB id
-            var document = ModelGenerator.Document();
+            var document = ModelGenerator.Document(FolderId);
             document.Id = context.Documents.Add(document);
 
             // See if saved document's values are correct
@@ -64,7 +74,7 @@ namespace SongWriter.Logic.Tests.Integration.Services
         public void CanCallGetAllDocuments()
         {
             var context = Provider.GetContext();
-            var documents = context.Documents.GetAll();
+            var documents = context.Documents.GetSummaries();
 
             Assert.IsNotNull(documents);
         }
@@ -74,20 +84,20 @@ namespace SongWriter.Logic.Tests.Integration.Services
         {
             var context = Provider.GetContext();
 
-            var previousItemsCount = context.Documents.GetAll().Count();
+            var previousItemsCount = context.Documents.GetSummaries().Count();
             var newItemsCount = RandomValueGenerator.Integer(5, 10);
 
             // Add random document and add to get its DB id
             var newDocuments = new List<Document>();
             for (var i = 0; i < newItemsCount; i++)
             {
-                var document = ModelGenerator.Document();
+                var document = ModelGenerator.Document(FolderId);
                 document.Id = context.Documents.Add(document);
 
                 newDocuments.Add(document);
             }
 
-            var savedItems = context.Documents.GetAll();
+            var savedItems = context.Documents.GetSummaries();
 
             var currentItemsCount = savedItems.Count();
 
@@ -112,7 +122,7 @@ namespace SongWriter.Logic.Tests.Integration.Services
             var context = Provider.GetContext();
 
             // Get existing item
-            var newId = context.Documents.Add(ModelGenerator.Document());
+            var newId = context.Documents.Add(ModelGenerator.Document(FolderId));
             var document = context.Documents.GetItem(newId);
 
             // Save it
@@ -124,7 +134,7 @@ namespace SongWriter.Logic.Tests.Integration.Services
         {
             var context = Provider.GetContext();
 
-            var newId = context.Documents.Add(ModelGenerator.Document());
+            var newId = context.Documents.Add(ModelGenerator.Document(FolderId));
 
             // Edit existing document name and save
             var document = context.Documents.GetItem(newId);
@@ -142,7 +152,7 @@ namespace SongWriter.Logic.Tests.Integration.Services
         {
             var context = Provider.GetContext();
 
-            var newId = context.Documents.Add(ModelGenerator.Document());
+            var newId = context.Documents.Add(ModelGenerator.Document(FolderId));
 
             // Edit existing document name and save
             var document = context.Documents.GetItem(newId);
@@ -160,7 +170,7 @@ namespace SongWriter.Logic.Tests.Integration.Services
         {
             var context = Provider.GetContext();
 
-            var newId = context.Documents.Add(ModelGenerator.Document());
+            var newId = context.Documents.Add(ModelGenerator.Document(FolderId));
 
             context.Documents.Remove(newId);
         }
@@ -171,17 +181,17 @@ namespace SongWriter.Logic.Tests.Integration.Services
             var context = Provider.GetContext();
 
             // Ensure at least one item exists
-            context.Documents.Add(ModelGenerator.Document());
+            context.Documents.Add(ModelGenerator.Document(FolderId));
 
             // Get items
-            var items = context.Documents.GetAll().ToList(); // Call ToList to ensure query runs now
+            var items = context.Documents.GetSummaries().ToList(); // Call ToList to ensure query runs now
 
             // Remove one of those
             var itemToRemove = items.RandomItem();
             context.Documents.Remove(itemToRemove.Id);
 
             var savedDocument = context.Documents.GetItem(itemToRemove.Id);
-            var savedItems = context.Documents.GetAll().ToList();
+            var savedItems = context.Documents.GetSummaries().ToList();
 
             Assert.IsNull(savedDocument);
             // Ensure one item has been removed

@@ -12,7 +12,7 @@ namespace SongWriter.Logic.Services.Abstractions
     {
         int Add(Document model);
 
-        IEnumerable<DocumentSummary> GetAll();
+        IEnumerable<DocumentSummary> GetSummaries();
 
         Document GetItem(int id);
 
