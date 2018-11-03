@@ -9,6 +9,14 @@
             <label>Text</label>
             <textarea class="form-control" v-model="model.text"></textarea>
         </div>
+        <div class="form-group">
+            <label>Folder</label>
+            <select v-model="model.folderId">
+                <option v-for="folder in folders" v-bind:value="folder.id">
+                    {{ folder.name }}
+                </option>
+            </select>
+        </div>
         <p>
             <a href="#" @click.prevent="createSong" class="btn btn-primary">Create Song</a>
         </p>
@@ -41,6 +49,11 @@
                     window.alert(err)
                     console.log(err)
                 }
+            }
+        },
+        computed: {
+            folders() {
+                return this.$store.state.lookups.folders;
             }
         }
     }

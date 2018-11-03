@@ -25,6 +25,17 @@ namespace SongWriter.Logic.Startup
                 Name = "Main"
             });
 
+            context.Folders.Add(new Folder()
+            {
+                Name = "Red"
+            });
+
+            context.Folders.Add(new Folder()
+            {
+                Name = "Blue"
+            });
+
+
             context.Documents.Add(new Document()
             {
                 Name = "Mary Had A Little Lamb",

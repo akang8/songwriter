@@ -11,7 +11,14 @@
             <label>Text</label>
             <textarea class="form-control" rows="10" v-model="model.text"></textarea>
         </div>
-
+        <div class="form-group">
+            <label>Folder</label>
+            <select v-model="model.folderId">
+                <option v-for="folder in folders" v-bind:value="folder.id">
+                    {{ folder.name }}
+                </option>
+            </select>
+        </div>
         <p>
             <a href="#" @click.prevent="saveDocument" class="btn btn-primary">Save</a>
         </p>
@@ -54,6 +61,11 @@
         },
         async created() {
             await this.loadDocument();
+        },
+        computed: {
+            folders() {
+                return this.$store.state.lookups.folders;
+            }
         }
     }
 </script>
