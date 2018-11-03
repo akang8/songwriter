@@ -116,6 +116,42 @@ namespace SongWriter.Logic.Tests.Integration.Services
         }
 
         [TestMethod]
+        public void CanGetLatestDocuments()
+        {
+            var context = Provider.GetContext();
+
+            var previousItemsCount = context.Documents.GetSummaries().Count();
+            var newItemsCount = 6;
+
+            // Add random document and add to get its DB id
+            var newDocuments = new List<Document>();
+            for (var i = 0; i < newItemsCount; i++)
+            {
+                var document = ModelGenerator.Document(FolderId);
+                document.Id = context.Documents.Add(document);
+
+                newDocuments.Add(document);
+            }
+
+            var savedItems = context.Documents.GetLatestSummaries();
+
+            var currentItemsCount = savedItems.Count();
+
+            // Check to see if number of items retrieved matches
+            Assert.AreEqual(5, currentItemsCount);
+
+            // Check if items retreived have correct values
+            foreach (var savedItem in savedItems)
+            {
+                var newDocument = newDocuments.Where(i => i.Id == savedItem.Id).SingleOrDefault();
+
+                Assert.IsNotNull(newDocument);
+
+                ModelAssert.AreEqual(newDocument, savedItem);
+            }
+        }
+
+        [TestMethod]
         public void CanGetAllDocumentsForFolder()
         {
             var context = Provider.GetContext();

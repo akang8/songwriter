@@ -14,6 +14,8 @@ namespace SongWriter.Logic.Services.Abstractions
 
         IEnumerable<DocumentSummary> GetSummaries();
 
+        IEnumerable<DocumentSummary> GetLatestSummaries();
+
         /// <summary>
         /// Get all document summaries in a specific folder
         /// </summary>

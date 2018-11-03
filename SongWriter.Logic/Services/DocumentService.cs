@@ -35,6 +35,15 @@ namespace SongWriter.Logic.Services
             return items;
         }
 
+
+        public IEnumerable<DocumentSummary> GetLatestSummaries()
+        {
+            var items = this.context.AppData.Documents.OrderByDescending(d => d.Id).Take(5).ProjectTo<DocumentSummary>();
+
+            return items;
+        }
+
+
         public IEnumerable<DocumentSummary> GetSummaries(int folderId)
         {
             var items = this.context.AppData.Documents
