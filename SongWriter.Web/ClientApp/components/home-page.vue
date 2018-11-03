@@ -1,14 +1,33 @@
 <template>
     <div>
-        <h1>Song Writer</h1>
-        <a href="#" @click.prevent="createSong" class="btn btn-primary"><icon :icon="['fas', 'plus-square']" /> Add Document</a>
-        <div v-if="documents.length > 0">
-            <home-page-document-summary v-for="document in documents" :document="document" :key="document.id"></home-page-document-summary>
+        <p>
+            <a href="#" @click.prevent="createSong" class="btn btn-primary"><icon :icon="['fas', 'plus-square']" /> Add Document</a>
+        </p>
+
+        <div class="row">
+            <div class="col-9">
+                <div v-if="documents.length > 0">
+                    <h3 class="mt-4">Recent Documents</h3>
+                    <document-cards :documents="documents"></document-cards>
+                </div>
+
+            </div>
+            <div class="col-3">
+                <div v-if="folders.length > 0">
+                    <h3>Folders</h3>
+                    <folder-cards :folders="folders"></folder-cards>
+                </div>
+                <p v-else class="alert alert-info">
+                    No documents, click "Add Document" above to get started.
+                </p>
+            </div>
         </div>
+
     </div>
 </template>
 <script>
-    import HomePageDocumentSummary from '@/components/home-page-document-summary';
+    import DocumentCards from '@/components/document-cards';
+    import FolderCards from '@/components/folder-cards';
 
     export default {
         data() {
@@ -17,7 +36,8 @@
             }
         },
         components: {
-            HomePageDocumentSummary
+            FolderCards,
+            DocumentCards
         },
         methods: {
             createSong() {
@@ -25,7 +45,7 @@
             },
             async loadDocuments() {
                 try {
-                    var result = await this.$http.get('document')
+                    var result = await this.$http.get('document/latest')
                     if (result) {
                         this.documents = result.data;
                     }
@@ -33,6 +53,11 @@
                     window.alert(err)
                     console.log(err)
                 }
+            }
+        },
+        computed: {
+            folders() {
+                return this.$store.state.lookups.folders;
             }
         },
         async created() {

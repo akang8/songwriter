@@ -20,6 +20,14 @@ namespace SongWriter.Web.Controllers
             return Ok(items);
         }
 
+        [HttpGet("Latest")]
+        public IActionResult GetLatest()
+        {
+            var items = this.context.Documents.GetLatestSummaries().ToList();
+
+            return Ok(items);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetItem(int id)
         {
