@@ -25,7 +25,7 @@
             },
             async loadDocuments() {
                 try {
-                    var result = await this.$http.get('/api/document')
+                    var result = await this.$http.get('document')
                     if (result) {
                         this.documents = result.data;
                     }

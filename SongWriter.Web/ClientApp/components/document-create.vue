@@ -28,7 +28,7 @@
         methods: {
             async createSong() {
                 try {
-                    var result = await this.$http.post('/api/document', this.model)
+                    var result = await this.$http.post('document', this.model)
                     if (result && result.data) {
                         this.$router.push({
                             name: 'DocumentEdit',

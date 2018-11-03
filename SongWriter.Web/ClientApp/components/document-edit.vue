@@ -29,7 +29,7 @@
         methods: {
             async loadDocument() {
                 try {
-                    var result = await this.$http.get(`/api/document/${this.id}`)
+                    var result = await this.$http.get(`document/${this.id}`)
                     if (result) {
                         this.model = result.data;
                     }
@@ -40,7 +40,7 @@
             },
             async saveDocument() {
                 try {
-                    var result = await this.$http.put(`/api/document`, this.model)
+                    var result = await this.$http.put(`document`, this.model)
                     if (result) {
                         // TODO: Change to a toastr or something
                         this.$router.push({name: 'Home'});
