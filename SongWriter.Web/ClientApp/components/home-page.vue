@@ -5,14 +5,14 @@
         </p>
 
         <div class="row">
-            <div class="col-9">
+            <div class="col-8">
                 <div v-if="documents.length > 0">
                     <h3 class="mt-4">Recent Documents</h3>
                     <document-cards :documents="documents"></document-cards>
                 </div>
 
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div v-if="folders.length > 0">
                     <h3>Folders</h3>
                     <folder-cards :folders="folders"></folder-cards>
