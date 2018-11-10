@@ -20,6 +20,14 @@ namespace SongWriter.Web.Controllers
             return Ok(items);
         }
 
+        [HttpGet("{folderId}")]
+        public IActionResult GetAll(int folderId)
+        {
+            var items = this.context.Documents.GetSummaries(folderId).ToList();
+
+            return Ok(items);
+        }
+
         [HttpGet("Latest")]
         public IActionResult GetLatest()
         {

@@ -24,10 +24,12 @@
             return {
                 model: {
                     name: '',
-                    text: ''
+                    text: '',
+                    folderId: 0
                 }
             }
         },
+        props: ['folderId'],
         components: {
             FolderSelect
         },
@@ -52,6 +54,11 @@
         computed: {
             folders() {
                 return this.$store.state.lookups.folders;
+            }
+        },
+        created() {
+            if (this.folderId) {
+                this.model.folderId = this.folderId;
             }
         }
     }

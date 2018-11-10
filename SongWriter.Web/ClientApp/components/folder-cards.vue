@@ -1,5 +1,5 @@
 <template>
-    <div class="card-deck">
+    <div>
         <div class="card" v-for="folder in folders">
             <div class="card-body">
                 <router-link :to="{ name: 'Folder', params: { id: folder.id, name: folder.name }}">
