@@ -2,10 +2,10 @@
     <span v-if="!creating">
         <a href="#" @click.prevent="creating = true">Create Folder</a>
     </span>
-    <span v-else>
+    <span v-else class="form-inline">
         New Folder: <input type="text" class="form-control" v-model="newFolderName" />
-        <a href="#" @click.prevent="createFolder">OK</a>
-        <a href="#" @click.prevent="creating = false">Cancel</a>
+        <a href="#" class="btn btn-primary btn-sm" @click.prevent="createFolder">OK</a>
+        <a href="#" class="btn btn-warning btn-sm" @click.prevent="creating = false">Cancel</a>
     </span>
 </template>
 <script>
