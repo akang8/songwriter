@@ -15,5 +15,9 @@ namespace SongWriter.Logic.Models
         public string Name { get; set; }
 
         public string Text { get; set; }
+
+        public int FolderId { get; set; }
+
+        public string FolderName { get; set; }
     }
 }

@@ -15,7 +15,23 @@ namespace SongWriter.Web.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var items = this.context.Documents.GetAll().ToList();
+            var items = this.context.Documents.GetSummaries().ToList();
+
+            return Ok(items);
+        }
+
+        [HttpGet("{folderId}")]
+        public IActionResult GetAll(int folderId)
+        {
+            var items = this.context.Documents.GetSummaries(folderId).ToList();
+
+            return Ok(items);
+        }
+
+        [HttpGet("Latest")]
+        public IActionResult GetLatest()
+        {
+            var items = this.context.Documents.GetLatestSummaries().ToList();
 
             return Ok(items);
         }

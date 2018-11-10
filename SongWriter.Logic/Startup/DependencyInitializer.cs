@@ -29,6 +29,7 @@ namespace SongWriter.Logic.Startup
                 });
 
             services.AddScoped<IDocumentService, DocumentService>();
+            services.AddScoped<IFolderService, FolderService>();
         }
     }
 }

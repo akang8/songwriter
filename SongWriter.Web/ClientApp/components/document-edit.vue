@@ -11,7 +11,7 @@
             <label>Text</label>
             <textarea class="form-control" rows="10" v-model="model.text"></textarea>
         </div>
-
+        <folder-select v-model="model.folderId"></folder-select>
         <p>
             <a href="#" @click.prevent="saveDocument" class="btn btn-primary">Save</a>
         </p>
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+    import FolderSelect from '@/components/folder-select';
+
     export default {
         data() {
             return {
@@ -26,10 +28,13 @@
             }
         },
         props: ['id'],
+        components: {
+            FolderSelect
+        },
         methods: {
             async loadDocument() {
                 try {
-                    var result = await this.$http.get(`/api/document/${this.id}`)
+                    var result = await this.$http.get(`document/${this.id}`)
                     if (result) {
                         this.model = result.data;
                     }
@@ -40,7 +45,7 @@
             },
             async saveDocument() {
                 try {
-                    var result = await this.$http.put(`/api/document`, this.model)
+                    var result = await this.$http.put(`document`, this.model)
                     if (result) {
                         // TODO: Change to a toastr or something
                         this.$router.push({name: 'Home'});

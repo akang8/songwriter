@@ -13,5 +13,8 @@ namespace SongWriter.Data
             : base(options) { }
 
         public DbSet<Document> Documents { get; set; }
+
+        public DbSet<Folder> Folders { get; set; }
+
     }
 }

@@ -18,5 +18,9 @@ namespace SongWriter.Data.Models
 
         [MaxLength]
         public string Text { get; set; }
+
+        public int FolderId { get; set; }
+
+        public Folder Folder { get; set; }
     }
 }

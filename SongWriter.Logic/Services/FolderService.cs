@@ -10,62 +10,44 @@ using data = SongWriter.Data.Models;
 
 namespace SongWriter.Logic.Services
 {
-    public class DocumentService : IDocumentService
+    public class FolderService : IFolderService
     {
         private readonly AppLogicContext context;
-        public DocumentService(AppLogicContext context)
+        public FolderService(AppLogicContext context)
         {
             this.context = context;
         }
 
-        public int Add(Document model)
+        public int Add(Folder model)
         {
             // Map to data model, and add to db
-            var dbModel = Mapper.Map<data.Document>(model);
+            var dbModel = Mapper.Map<data.Folder>(model);
             this.context.AppData.Add(dbModel);
             this.context.AppData.SaveChanges();
 
             return dbModel.Id;
         }
 
-        public IEnumerable<DocumentSummary> GetSummaries()
+        public IEnumerable<Folder> GetAll()
         {
-            var items = this.context.AppData.Documents.ProjectTo<DocumentSummary>();
+            var items = this.context.AppData.Folders.ProjectTo<Folder>();
 
             return items;
         }
 
-
-        public IEnumerable<DocumentSummary> GetLatestSummaries()
+        public Folder GetItem(int id)
         {
-            var items = this.context.AppData.Documents.OrderByDescending(d => d.Id).Take(5).ProjectTo<DocumentSummary>();
-
-            return items;
-        }
-
-
-        public IEnumerable<DocumentSummary> GetSummaries(int folderId)
-        {
-            var items = this.context.AppData.Documents
-                                                .Where(d => d.FolderId == folderId)
-                                                .ProjectTo<DocumentSummary>();
-
-            return items;
-        }
-
-        public Document GetItem(int id)
-        {
-            var model = this.context.AppData.Documents
+            var model = this.context.AppData.Folders
                                                     .Where(d => d.Id == id)
-                                                    .ProjectTo<Document>()
+                                                    .ProjectTo<Folder>()
                                                     .SingleOrDefault();
 
             return model;
         }
 
-        public void Save(Document model)
+        public void Save(Folder model)
         {
-            var dbModel = this.context.AppData.Documents
+            var dbModel = this.context.AppData.Folders
                                                     .Where(d => d.Id == model.Id)
                                                     .SingleOrDefault();
 
@@ -76,7 +58,7 @@ namespace SongWriter.Logic.Services
 
         public void Remove(int id)
         {
-            var dbItem = this.context.AppData.Documents.Find(id);
+            var dbItem = this.context.AppData.Folders.Find(id);
             this.context.AppData.Remove(dbItem);
             this.context.AppData.SaveChanges();
         }

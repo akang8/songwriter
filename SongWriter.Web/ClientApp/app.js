@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import axios from 'axios'
+import http from '@/infrastructure/httpHelper'
 import router from './router/index'
 import store from './store'
 import { sync } from 'vuex-router-sync'
@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from './icons'
 // Registration of global components
 Vue.component('icon', FontAwesomeIcon)
 
-Vue.prototype.$http = axios
+Vue.prototype.$http = http
 
 sync(store, router)
 

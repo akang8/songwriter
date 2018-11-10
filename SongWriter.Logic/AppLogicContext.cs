@@ -36,5 +36,13 @@ namespace SongWriter.Logic
                 return this.services.GetService<IDocumentService>();
             }
         }
+
+        public IFolderService Folders
+        {
+            get
+            {
+                return this.services.GetService<IFolderService>();
+            }
+        }
     }
 }

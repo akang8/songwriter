@@ -9,6 +9,7 @@
             <label>Text</label>
             <textarea class="form-control" v-model="model.text"></textarea>
         </div>
+        <folder-select v-model="model.folderId"></folder-select>
         <p>
             <a href="#" @click.prevent="createSong" class="btn btn-primary">Create Song</a>
         </p>
@@ -16,19 +17,26 @@
 </template>
 
 <script>
+    import FolderSelect from '@/components/folder-select';
+
     export default {
         data() {
             return {
                 model: {
                     name: '',
-                    text: ''
+                    text: '',
+                    folderId: 0
                 }
             }
+        },
+        props: ['folderId'],
+        components: {
+            FolderSelect
         },
         methods: {
             async createSong() {
                 try {
-                    var result = await this.$http.post('/api/document', this.model)
+                    var result = await this.$http.post('document', this.model)
                     if (result && result.data) {
                         this.$router.push({
                             name: 'DocumentEdit',
@@ -41,6 +49,16 @@
                     window.alert(err)
                     console.log(err)
                 }
+            }
+        },
+        computed: {
+            folders() {
+                return this.$store.state.lookups.folders;
+            }
+        },
+        created() {
+            if (this.folderId) {
+                this.model.folderId = this.folderId;
             }
         }
     }

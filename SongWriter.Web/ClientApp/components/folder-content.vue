@@ -6,7 +6,7 @@
 
         <div class="row">
             <div class="col-8">
-                <h3 class="mt-4">Recent Documents</h3>
+                <h3 class="mt-4">Contents</h3>
                 <document-cards :documents="documents"></document-cards>
             </div>
             <div class="col-4">
@@ -32,17 +32,18 @@
                 documents: []
             }
         },
+        props: ['id'],
         components: {
             FolderCards,
             DocumentCards
         },
         methods: {
             createSong() {
-                this.$router.push({ name: 'DocumentCreate', params: { folderId: 0 } });
+                this.$router.push({ name: 'DocumentCreate', params: { folderId: this.id } });
             },
             async loadDocuments() {
                 try {
-                    var result = await this.$http.get('document/latest')
+                    var result = await this.$http.get(`document/${this.id}`)
                     if (result) {
                         this.documents = result.data;
                     }
