@@ -8,7 +8,7 @@
         </div>
 
         <div class="container-fluid">
-            <router-view></router-view>
+            <router-view :key="$route.fullPath"></router-view>
 
             <footer class="pt-4 my-md-5 pt-md-5 border-top">
                 <div class="row">
