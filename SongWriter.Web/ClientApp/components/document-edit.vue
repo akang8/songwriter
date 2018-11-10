@@ -11,15 +11,7 @@
             <label>Text</label>
             <textarea class="form-control" rows="10" v-model="model.text"></textarea>
         </div>
-        <div class="form-group">
-            <label>Folder</label>
-            <select v-model="model.folderId">
-                <option v-for="folder in folders" v-bind:value="folder.id">
-                    {{ folder.name }}
-                </option>
-            </select>
-            <folder-create @created="folderCreated"></folder-create>
-        </div>
+        <folder-select v-model="model.folderId"></folder-select>
         <p>
             <a href="#" @click.prevent="saveDocument" class="btn btn-primary">Save</a>
         </p>
@@ -27,7 +19,7 @@
 </template>
 
 <script>
-    import FolderCreate from '@/components/folder-create';
+    import FolderSelect from '@/components/folder-select';
 
     export default {
         data() {
@@ -37,7 +29,7 @@
         },
         props: ['id'],
         components: {
-            FolderCreate
+            FolderSelect
         },
         methods: {
             async loadDocument() {
@@ -63,23 +55,10 @@
                     console.log(err)
                 }
 
-            },
-            async folderCreated(newFolderId) {
-                await this.$store.dispatch("lookups/updateFolders");
-                // Wait for UI to catch up
-                this.$nextTick(() => {
-                    // Set new value
-                    this.model.folderId = newFolderId
-                })
             }
         },
         async created() {
             await this.loadDocument();
-        },
-        computed: {
-            folders() {
-                return this.$store.state.lookups.folders;
-            }
         }
     }
 </script>
