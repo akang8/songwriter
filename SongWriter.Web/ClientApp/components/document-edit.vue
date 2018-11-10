@@ -18,6 +18,7 @@
                     {{ folder.name }}
                 </option>
             </select>
+            <folder-create @created="folderCreated"></folder-create>
         </div>
         <p>
             <a href="#" @click.prevent="saveDocument" class="btn btn-primary">Save</a>
@@ -26,6 +27,8 @@
 </template>
 
 <script>
+    import FolderCreate from '@/components/folder-create';
+
     export default {
         data() {
             return {
@@ -33,6 +36,9 @@
             }
         },
         props: ['id'],
+        components: {
+            FolderCreate
+        },
         methods: {
             async loadDocument() {
                 try {
@@ -57,6 +63,14 @@
                     console.log(err)
                 }
 
+            },
+            async folderCreated(newFolderId) {
+                await this.$store.dispatch("lookups/updateFolders");
+                // Wait for UI to catch up
+                this.$nextTick(() => {
+                    // Set new value
+                    this.model.folderId = newFolderId
+                })
             }
         },
         async created() {
