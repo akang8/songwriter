@@ -43,7 +43,7 @@
             },
             async loadDocuments() {
                 try {
-                    var result = await this.$http.get(`document/${this.id}`)
+                    var result = await this.$http.get(`document/folder/${this.id}`)
                     if (result) {
                         this.documents = result.data;
                     }
