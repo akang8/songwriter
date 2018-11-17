@@ -94,13 +94,13 @@
     div.CodeMirror{
         border: 1px solid #eee;
     }
-    cm-annotation{
+    .cm-annotation{
         color: darkred
     }
-    cm-chords{
+    .cm-chord{
         color: seagreen
     }
-    cm-lyrics{
+    .cm-lyric{
         color: darkblue
     }
 </style>

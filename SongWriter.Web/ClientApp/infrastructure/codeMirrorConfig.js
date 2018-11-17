@@ -9,15 +9,15 @@ const configure = function () {
                 // Handle Comments
                 if (ch === "!") {
                     stream.skipToEnd();
-                    return 'comment';
+                    return 'annotation';
                 }
                 else if (ch === "@") {
                     stream.skipToEnd();
-                    return 'number';
+                    return 'chord';
                 }
                 else if (ch === "#") {
                     stream.skipToEnd();
-                    return 'operator';
+                    return 'lyric';
                 }
                 else {
                     stream.next()
