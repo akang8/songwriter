@@ -1,5 +1,6 @@
 <template>
     <div>
+        <router-link :to="{ name: 'Home' }">Home</router-link>
         <h1>Create Song</h1>
         <div class="form-group">
             <label>Name</label>
