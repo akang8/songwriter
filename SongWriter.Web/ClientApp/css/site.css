@@ -77,3 +77,45 @@
         text-overflow: ellipsis;
     }
 }
+
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+div.header {
+    background-color: #336699;
+}
+
+    div.header a, div.header a:visited, div.header a:hover, div.header a:active {
+        color: #fff;
+    }
+
+.container {
+    max-width: 960px;
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #3973ac;
+    border-color: #2d5986;
+}
+
+a {
+    color: #336699;
+}

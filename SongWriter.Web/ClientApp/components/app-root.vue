@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom header">
             <h5 class="my-0 mr-md-auto font-weight-normal">
                 <router-link class="navbar-brand" to="/"><icon :icon="['fas', 'music']" /> SongWriter</router-link>
             </h5>
@@ -34,26 +34,6 @@
     }
 </script>
 <style>
-    html {
-        font-size: 14px;
-    }
 
-    @media (min-width: 768px) {
-        html {
-            font-size: 16px;
-        }
-    }
-
-    .container {
-        max-width: 960px;
-    }
-
-    .border-top {
-        border-top: 1px solid #e5e5e5;
-    }
-
-    .border-bottom {
-        border-bottom: 1px solid #e5e5e5;
-    }
 
 </style>
