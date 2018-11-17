@@ -5,11 +5,14 @@ import store from './store'
 import { sync } from 'vuex-router-sync'
 import App from '@/components/app-root'
 import { FontAwesomeIcon } from './icons'
+import configure from '@/infrastructure/codeMirrorConfig';
 
 // Registration of global components
 Vue.component('icon', FontAwesomeIcon)
 
 Vue.prototype.$http = http
+
+configure();
 
 sync(store, router)
 

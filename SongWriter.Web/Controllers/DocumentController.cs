@@ -20,7 +20,7 @@ namespace SongWriter.Web.Controllers
             return Ok(items);
         }
 
-        [HttpGet("{folderId}")]
+        [HttpGet("Folder/{folderId}")]
         public IActionResult GetAll(int folderId)
         {
             var items = this.context.Documents.GetSummaries(folderId).ToList();

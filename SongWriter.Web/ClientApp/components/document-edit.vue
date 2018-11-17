@@ -1,5 +1,6 @@
 <template>
     <div v-if="model">
+        <router-link :to="{ name: 'Home' }">Home</router-link>
         <h1 v-once>
             {{model.name}}
         </h1>
@@ -9,7 +10,7 @@
         </div>
         <div class="form-group">
             <label>Text</label>
-            <textarea class="form-control" rows="10" v-model="model.text"></textarea>
+            <text-editor v-model="model.text"></text-editor>
         </div>
         <folder-select v-model="model.folderId"></folder-select>
         <p>
@@ -20,16 +21,19 @@
 
 <script>
     import FolderSelect from '@/components/folder-select';
+    import TextEditor from '@/components/text-editor';
 
     export default {
         data() {
             return {
-                model: null
+                model: {
+                }
             }
         },
         props: ['id'],
         components: {
-            FolderSelect
+            FolderSelect,
+            TextEditor
         },
         methods: {
             async loadDocument() {
@@ -37,6 +41,7 @@
                     var result = await this.$http.get(`document/${this.id}`)
                     if (result) {
                         this.model = result.data;
+                        this.code = this.model.text;
                     }
                 } catch (err) {
                     window.alert(err)
@@ -62,6 +67,3 @@
         }
     }
 </script>
-
-<style>
-</style>
