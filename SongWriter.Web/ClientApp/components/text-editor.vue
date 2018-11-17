@@ -6,6 +6,7 @@
                 <span class="text-secondary">
                     <icon :icon="['fas', 'info-circle']" />
                 </span>
+                <span class="cm-section">[section]</span>
                 <span class="cm-annotation">!comment</span>
                 <span class="cm-chord">@chord</span>
                 <span class="cm-lyric">#lyric</span>
@@ -94,5 +95,9 @@
 
     .cm-lyric {
         color: #00008b
+    }
+
+    .cm-section{
+        color: #777;
     }
 </style>

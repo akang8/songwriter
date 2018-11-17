@@ -6,33 +6,43 @@ const configure = function () {
             token(stream, state) {
                 var ch = stream.peek();
 
+
                 // Handle Comments
                 if (stream.sol()) {
-                    if (ch === "!") {
-                        stream.next();
-                        if (stream.eol()) {
-                            return 'start-annotation';
-                        }
-                        else {
-                            return 'marker-annotation';
-                        }
+                    if (stream.match("[")) {
+                        while ((ch = stream.next()) != null)
+                            if (ch == "]") {
+                                stream.eat("]");
+                                return "section";
+                            }
                     }
-                    else if (ch === "@") {
-                        stream.next();
-                        if (stream.eol()) {
-                            return 'start-chord';
+                    else {
+                        if (ch === "!") {
+                            stream.next();
+                            if (stream.eol()) {
+                                return 'start-annotation';
+                            }
+                            else {
+                                return 'marker-annotation';
+                            }
                         }
-                        else {
-                            return 'marker-chord';
+                        else if (ch === "@") {
+                            stream.next();
+                            if (stream.eol()) {
+                                return 'start-chord';
+                            }
+                            else {
+                                return 'marker-chord';
+                            }
                         }
-                    }
-                    else if (ch === "#") {
-                        stream.next();
-                        if (stream.eol()) {
-                            return 'start-lyric';
-                        }
-                        else {
-                            return 'marker-lyric';
+                        else if (ch === "#") {
+                            stream.next();
+                            if (stream.eol()) {
+                                return 'start-lyric';
+                            }
+                            else {
+                                return 'marker-lyric';
+                            }
                         }
                     }
 
