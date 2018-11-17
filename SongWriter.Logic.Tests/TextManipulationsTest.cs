@@ -57,5 +57,36 @@ namespace SongWriter.Logic.Tests
             Assert.AreEqual(textLength, newText.Length);
         }
 
+        [TestMethod]
+        public void CanStripLyricMarkerWhenSummarizing()
+        {
+            var text = $"#{RandomValueGenerator.AlphaNumericTextWithSpaces(10, 20)}\n#{RandomValueGenerator.AlphaNumericTextWithSpaces(10, 20)}";
+            var newText = TextManipulations.Summarize(text);
+
+            Assert.IsFalse(newText.Contains('#'));
+        }
+
+        [TestMethod]
+        public void CanStripChordsWhenSummarizing()
+        {
+            var chords = $"@{RandomValueGenerator.AlphaNumericTextWithSpaces(10, 20)}";
+            var text = $"{chords}\n{RandomValueGenerator.AlphaNumericTextWithSpaces(10, 20)}";
+            var newText = TextManipulations.Summarize(text);
+
+            Assert.IsFalse(newText.Contains('@'));
+            Assert.IsFalse(newText.Contains(chords.Substring(1)));
+        }
+
+        [TestMethod]
+        public void CanStripAnnotationsWhenSummarizing()
+        {
+            var annotation = $"!{RandomValueGenerator.AlphaNumericTextWithSpaces(10, 20)}";
+            var text = $"{annotation}\n{RandomValueGenerator.AlphaNumericTextWithSpaces(10, 20)}";
+            var newText = TextManipulations.Summarize(text);
+
+            Assert.IsFalse(newText.Contains('!'));
+            Assert.IsFalse(newText.Contains(annotation.Substring(1)));
+        }
+
     }
 }

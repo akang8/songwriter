@@ -15,7 +15,7 @@ namespace SongWriter.Logic.Mapping
             // Creates map to document summary
             // Doesn't need a reciprocal mapping, this is a one-way mapping
             this.CreateMap<data.Document, DocumentSummary>()
-                            .ForMember(m => m.SummaryText, o => o.MapFrom(src => TextManipulations.ShortenTextForSummary(src.Text)));
+                            .ForMember(m => m.SummaryText, o => o.MapFrom(src => TextManipulations.Summarize(src.Text)));
         }
     }
 }
