@@ -14,6 +14,7 @@ fontawesome.library.add(
     require('@fortawesome/fontawesome-free-solid/faPlusSquare'),
     require('@fortawesome/fontawesome-free-solid/faMusic'),
     require('@fortawesome/fontawesome-free-solid/faFolder'),
+    require('@fortawesome/fontawesome-free-solid/faInfoCircle'),
     // Brands
     require('@fortawesome/fontawesome-free-brands/faFontAwesome'),
     require('@fortawesome/fontawesome-free-brands/faVuejs')

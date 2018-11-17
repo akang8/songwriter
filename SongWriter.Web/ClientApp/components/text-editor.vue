@@ -1,5 +1,17 @@
 <template>
-    <codemirror v-model="wrappedValue" :options="editorOptions"></codemirror>
+    <div>
+        <codemirror v-model="wrappedValue" :options="editorOptions"></codemirror>
+        <p>
+            <span class="float-right">
+                <span class="text-secondary">
+                    <icon :icon="['fas', 'info-circle']" />
+                </span>
+                <span class="cm-annotation">!comment</span>
+                <span class="cm-chord">@chord</span>
+                <span class="cm-lyric">#lyric</span>
+            </span>
+        </p>
+    </div>
 </template>
 <script>
     import { codemirror } from 'vue-codemirror'
@@ -45,11 +57,11 @@
     }
 
     .cm-annotation {
-        color: darkred
+        color: firebrick
     }
 
     .cm-chord {
-        color: seagreen
+        color: forestgreen
     }
 
     .cm-lyric {

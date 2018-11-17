@@ -8,16 +8,22 @@ const configure = function () {
 
                 // Handle Comments
                 if (ch === "!") {
-                    stream.skipToEnd();
-                    return 'annotation';
+                    if (stream.sol()) {
+                        stream.skipToEnd();
+                        return 'annotation';
+                    }
                 }
                 else if (ch === "@") {
-                    stream.skipToEnd();
-                    return 'chord';
+                    if (stream.sol()) {
+                        stream.skipToEnd();
+                        return 'chord';
+                    }
                 }
                 else if (ch === "#") {
-                    stream.skipToEnd();
-                    return 'lyric';
+                    if (stream.sol()) {
+                        stream.skipToEnd();
+                        return 'lyric';
+                    }
                 }
                 else {
                     stream.next()
