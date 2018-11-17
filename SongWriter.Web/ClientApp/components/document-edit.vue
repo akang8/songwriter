@@ -92,7 +92,8 @@
 
 <style>
     div.CodeMirror{
-        border: 1px solid #eee;
+        border: 1px solid #ccc;
+        border-radius: 5px;
     }
     .cm-annotation{
         color: darkred
