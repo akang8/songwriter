@@ -119,3 +119,10 @@ div.header {
 a {
     color: #336699;
 }
+
+div.folder-container {
+    border: 1px solid #ddd;
+    border-right: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}

@@ -5,14 +5,16 @@
         </p>
 
         <div class="row">
-            <div class="col-8">
-                <h3 class="mt-4">Contents</h3>
+            <div class="col-9">
+                <h3 class="mt-4">Browse Folder <small>{{this.name}}</small></h3>
                 <document-cards :documents="documents"></document-cards>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <div v-if="folders.length > 0">
-                    <h3>Folders</h3>
-                    <folder-cards :folders="folders"></folder-cards>
+                    <div class="folder-container pl-3">
+                        <h4>Folders</h4>
+                        <folder-cards :folders="folders"></folder-cards>
+                    </div>
                 </div>
                 <p v-else class="alert alert-info">
                     No documents, click "Add Document" above to get started.
@@ -32,7 +34,7 @@
                 documents: []
             }
         },
-        props: ['id'],
+        props: ['id', 'name'],
         components: {
             FolderCards,
             DocumentCards
