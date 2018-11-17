@@ -20,8 +20,6 @@
 
 <script>
     import FolderSelect from '@/components/folder-select';
-    // language js
-    import 'codemirror/mode/javascript/javascript.js'
     import { codemirror } from 'vue-codemirror'
     import 'codemirror/lib/codemirror.css'
     import CodeMirror from 'codemirror';
@@ -35,7 +33,7 @@
                 cmOptions: {
                     // codemirror options
                     tabSize: 4,
-                    mode: 'mymode',
+                    mode: 'songwriter',
                     lineNumbers: false,
                     line: true,
                 }
@@ -82,10 +80,6 @@
         },
         async created() {
             await this.loadDocument();
-        },
-        mounted() {
-            //CodeMirror.fromTextArea(this.$refs.editor);
-            CodeMirror(this.$refs.editorcontainer);
         }
     }
 </script>

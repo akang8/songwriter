@@ -7,7 +7,7 @@
         </div>
         <div class="form-group">
             <label>Text</label>
-            <textarea class="form-control" v-model="model.text"></textarea>
+            <text-editor v-model="model.text"></text-editor>
         </div>
         <folder-select v-model="model.folderId"></folder-select>
         <p>
@@ -18,6 +18,7 @@
 
 <script>
     import FolderSelect from '@/components/folder-select';
+    import TextEditor from '@/components/text-editor';
 
     export default {
         data() {
@@ -31,7 +32,8 @@
         },
         props: ['folderId'],
         components: {
-            FolderSelect
+            FolderSelect,
+            TextEditor
         },
         methods: {
             async createSong() {

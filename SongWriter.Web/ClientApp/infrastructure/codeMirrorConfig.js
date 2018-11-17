@@ -1,7 +1,7 @@
 import CodeMirror from 'codemirror';
 
 const configure = function () {
-    CodeMirror.defineMode('mymode', () => {
+    CodeMirror.defineMode('songwriter', () => {
         return {
             token(stream, state) {
                 var ch = stream.peek();
