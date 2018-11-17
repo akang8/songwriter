@@ -15,25 +15,6 @@
                     <div class="col-12 col-md">
                         <small class="d-block mb-3 text-muted">&copy; 2018</small>
                     </div>
-                    <div class="col-6 col-md">
-                        <h5>Contact</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="#">Email</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-md">
-                        <h5>Resources</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="#">Resource</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-md">
-                        <h5>About</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="#">Purpose</a></li>
-                            <li><a class="text-muted" href="#">FAQ</a></li>
-                        </ul>
-                    </div>
                 </div>
             </footer>
         </div>
