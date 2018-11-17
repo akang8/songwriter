@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             <label>Text</label>
-            <codemirror v-model="code" :options="cmOptions"></codemirror>
+            <text-editor v-model="model.text"></text-editor>
         </div>
         <folder-select v-model="model.folderId"></folder-select>
         <p>
@@ -20,29 +20,19 @@
 
 <script>
     import FolderSelect from '@/components/folder-select';
-    import { codemirror } from 'vue-codemirror'
-    import 'codemirror/lib/codemirror.css'
-    import CodeMirror from 'codemirror';
+    import TextEditor from '@/components/text-editor';
 
     export default {
         data() {
             return {
                 model: {
-                },
-                code: '', //HACK: codemirror cant get deep property w/o error
-                cmOptions: {
-                    // codemirror options
-                    tabSize: 4,
-                    mode: 'songwriter',
-                    lineNumbers: false,
-                    line: true,
                 }
             }
         },
         props: ['id'],
         components: {
             FolderSelect,
-            codemirror
+            TextEditor
         },
         methods: {
             async loadDocument() {
@@ -71,31 +61,8 @@
 
             }
         },
-        watch: {
-            code(newValue) {
-                if (this.model) {
-                    this.model.text = newValue;
-                }
-            }
-        },
         async created() {
             await this.loadDocument();
         }
     }
 </script>
-
-<style>
-    div.CodeMirror{
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    .cm-annotation{
-        color: darkred
-    }
-    .cm-chord{
-        color: seagreen
-    }
-    .cm-lyric{
-        color: darkblue
-    }
-</style>
