@@ -35,9 +35,12 @@ const configure = function () {
                             return 'marker-lyric';
                         }
                     }
+
+                    stream.next()
+                    return null
                 }
                 else {
-                    // Go back one line, should be safe since we know we're not at the SOL
+                    // Go back one char, should be safe since we know we're not at the SOL
                     stream.backUp();
                     var ch = stream.peek();
 
@@ -54,7 +57,7 @@ const configure = function () {
                         return 'lyric';
                     }
 
-                    stream.next()
+                    stream.skipToEnd()
                     return null
                 }
             }
