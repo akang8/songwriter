@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             <label>Text</label>
-            <textarea class="form-control" rows="10" v-model="model.text"></textarea>
+            <codemirror v-model="code" :options="cmOptions"></codemirror>
         </div>
         <folder-select v-model="model.folderId"></folder-select>
         <p>
@@ -20,16 +20,31 @@
 
 <script>
     import FolderSelect from '@/components/folder-select';
+    // language js
+    import 'codemirror/mode/javascript/javascript.js'
+    import { codemirror } from 'vue-codemirror'
+    import 'codemirror/lib/codemirror.css'
+    import CodeMirror from 'codemirror';
 
     export default {
         data() {
             return {
-                model: null
+                model: {
+                },
+                code: '', //HACK: codemirror cant get deep property w/o error
+                cmOptions: {
+                    // codemirror options
+                    tabSize: 4,
+                    mode: 'mymode',
+                    lineNumbers: false,
+                    line: true,
+                }
             }
         },
         props: ['id'],
         components: {
-            FolderSelect
+            FolderSelect,
+            codemirror
         },
         methods: {
             async loadDocument() {
@@ -37,6 +52,7 @@
                     var result = await this.$http.get(`document/${this.id}`)
                     if (result) {
                         this.model = result.data;
+                        this.code = this.model.text;
                     }
                 } catch (err) {
                     window.alert(err)
@@ -57,11 +73,34 @@
 
             }
         },
+        watch: {
+            code(newValue) {
+                if (this.model) {
+                    this.model.text = newValue;
+                }
+            }
+        },
         async created() {
             await this.loadDocument();
+        },
+        mounted() {
+            //CodeMirror.fromTextArea(this.$refs.editor);
+            CodeMirror(this.$refs.editorcontainer);
         }
     }
 </script>
 
 <style>
+    div.CodeMirror{
+        border: 1px solid #eee;
+    }
+    cm-annotation{
+        color: darkred
+    }
+    cm-chords{
+        color: seagreen
+    }
+    cm-lyrics{
+        color: darkblue
+    }
 </style>
