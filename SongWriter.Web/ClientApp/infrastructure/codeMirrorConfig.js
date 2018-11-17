@@ -7,25 +7,53 @@ const configure = function () {
                 var ch = stream.peek();
 
                 // Handle Comments
-                if (ch === "!") {
-                    if (stream.sol()) {
-                        stream.skipToEnd();
-                        return 'annotation';
+                if (stream.sol()) {
+                    if (ch === "!") {
+                        stream.next();
+                        if (stream.eol()) {
+                            return 'start-annotation';
+                        }
+                        else {
+                            return 'marker-annotation';
+                        }
                     }
-                }
-                else if (ch === "@") {
-                    if (stream.sol()) {
-                        stream.skipToEnd();
-                        return 'chord';
+                    else if (ch === "@") {
+                        stream.next();
+                        if (stream.eol()) {
+                            return 'start-chord';
+                        }
+                        else {
+                            return 'marker-chord';
+                        }
                     }
-                }
-                else if (ch === "#") {
-                    if (stream.sol()) {
-                        stream.skipToEnd();
-                        return 'lyric';
+                    else if (ch === "#") {
+                        stream.next();
+                        if (stream.eol()) {
+                            return 'start-lyric';
+                        }
+                        else {
+                            return 'marker-lyric';
+                        }
                     }
                 }
                 else {
+                    // Go back one line, should be safe since we know we're not at the SOL
+                    stream.backUp();
+                    var ch = stream.peek();
+
+                    if (ch === "!") {
+                        stream.skipToEnd();
+                        return 'annotation';
+                    }
+                    else if (ch === "@") {
+                        stream.skipToEnd();
+                        return 'chord';
+                    }
+                    else if (ch === "#") {
+                        stream.skipToEnd();
+                        return 'lyric';
+                    }
+
                     stream.next()
                     return null
                 }

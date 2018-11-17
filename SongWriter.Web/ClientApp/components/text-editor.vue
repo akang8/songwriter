@@ -56,15 +56,43 @@
         border-radius: 5px;
     }
 
+    .cm-marker-annotation {
+        color: #c3a0a0;
+    }
+
+    .cm-marker-chord {
+        color: #88b388;
+    }
+
+    .cm-marker-lyric {
+        color: #b2b2d2;
+    }
+
+    .cm-start-annotation {
+        color: #b22222;
+        background-color: #c3a0a0
+    }
+
+    .cm-start-chord {
+        color: #0f860f;
+        background-color: #88b388;
+    }
+
+    .cm-start-lyric {
+        color: #00008b;
+        background-color: #b2b2d2;
+    }
+
+
     .cm-annotation {
-        color: firebrick
+        color: #b22222
     }
 
     .cm-chord {
-        color: forestgreen
+        color: #0f860f
     }
 
     .cm-lyric {
-        color: darkblue
+        color: #00008b
     }
 </style>
