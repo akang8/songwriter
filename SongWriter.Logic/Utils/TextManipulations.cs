@@ -31,12 +31,12 @@ namespace SongWriter.Logic.Utils
                     if (line.StartsWith("#"))
                     {
                         // If its a lyric line, remove marker
-                        cleanedValue.AppendLine(line.Substring(1));
+                        cleanedValue.AppendLine(line.Substring(1).Trim());
                     }
                     else
                     {
                         // If text, add it
-                        cleanedValue.AppendLine(line);
+                        cleanedValue.AppendLine(line.Trim());
                     }
                 }
             }
@@ -55,10 +55,10 @@ namespace SongWriter.Logic.Utils
             if (value.IndexOf(" ", length) == -1)
             {
                 // Return truncated despite no spaces
-                return $"{value.Substring(0, length)}...";
+                return $"{value.Substring(0, length)}...".Trim();
             }
 
-            return $"{value.Substring(0, value.IndexOf(" ", length))}...";
+            return $"{value.Substring(0, value.IndexOf(" ", length))}...".Trim();
         }
     }
 }
