@@ -1,5 +1,9 @@
 <template>
-    <div>
+    <div v-if="isLoading">
+        <icon :icon="['fas', 'spinner']" class="fa-spin"></icon>
+        Loading...
+    </div>
+    <div v-else>
         <p>
             <a href="#" @click.prevent="createSong" class="btn btn-primary"><icon :icon="['fas', 'plus-square']" /> Add Document</a>
         </p>
@@ -29,12 +33,17 @@
     export default {
         data() {
             return {
-                documents: []
+                documents: [],
+                isLoading: true
             }
         },
         components: {
             FolderCards,
             DocumentCards
+        },
+        async created() {
+            // Fire and forget, no need for await here?
+            this.loadDocuments();
         },
         methods: {
             createSong() {
@@ -44,8 +53,9 @@
                 try {
                     var result = await this.$http.get('document/latest')
                     if (result) {
-                        this.documents = result.data;
+                        this.documents = result.data;                        
                     }
+                    this.isLoading = false;
                 } catch (err) {
                     window.alert(err)
                     console.log(err)
@@ -56,10 +66,6 @@
             folders() {
                 return this.$store.state.lookups.folders;
             }
-        },
-        async created() {
-            // Fire and forget, no need for await here?
-            this.loadDocuments();
         }
     }
 </script>
