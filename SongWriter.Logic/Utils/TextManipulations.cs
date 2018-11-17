@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SongWriter.Logic.Utils
 {
     public static class TextManipulations
     {
         public static int SummaryLength = 200;
+        public static string AnnotationMarker = "!";
+        public static string ChordMarker = "@";
+        public static string LyricMarker = "#";
+        public static string SectionNameStartMarker = "[";
+        public static string SectionNameEndMarker = "]";
 
         public static string Summarize(this string value)
         {
@@ -18,17 +24,20 @@ namespace SongWriter.Logic.Utils
 
         private static string CleanFormatting(string value)
         {
+            // Clean sections
+            value = Regex.Replace(value, @"\" + SectionNameStartMarker + @".*?\" + SectionNameEndMarker, string.Empty);
+
             // Replace annotations and chords
             var lines = value.Split('\n');
             var cleanedValue = new StringBuilder();
-            string[] prefixes = { "!", "@" };
+            string[] prefixes = { AnnotationMarker, ChordMarker };
 
             foreach (var line in lines)
             {
                 // Only add text or lyric lines
                 if (!prefixes.Any(p => line.StartsWith(p)))
                 {
-                    if (line.StartsWith("#"))
+                    if (line.StartsWith(LyricMarker))
                     {
                         // If its a lyric line, remove marker
                         cleanedValue.AppendLine(line.Substring(1).Trim());

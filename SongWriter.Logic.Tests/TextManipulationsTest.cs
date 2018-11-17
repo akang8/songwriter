@@ -88,5 +88,15 @@ namespace SongWriter.Logic.Tests
             Assert.IsFalse(newText.Contains(annotation.Substring(1)));
         }
 
+        [TestMethod]
+        public void CanStripSectionsWhenSummarizing()
+        {
+            var section = $"[{RandomValueGenerator.AlphaNumericText(10, 20)}]";
+            var text = $"{RandomValueGenerator.AlphaNumericTextWithSpaces(10, 20)}\n{section}";
+            var newText = TextManipulations.Summarize(text);
+
+            Assert.IsFalse(newText.Contains(section));
+        }
+
     }
 }
