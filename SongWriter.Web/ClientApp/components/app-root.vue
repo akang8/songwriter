@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom header">
             <h5 class="my-0 mr-md-auto font-weight-normal">
                 <router-link class="navbar-brand" to="/"><icon :icon="['fas', 'music']" /> SongWriter</router-link>
             </h5>
@@ -14,25 +14,6 @@
                 <div class="row">
                     <div class="col-12 col-md">
                         <small class="d-block mb-3 text-muted">&copy; 2018</small>
-                    </div>
-                    <div class="col-6 col-md">
-                        <h5>Contact</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="#">Email</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-md">
-                        <h5>Resources</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="#">Resource</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-md">
-                        <h5>About</h5>
-                        <ul class="list-unstyled text-small">
-                            <li><a class="text-muted" href="#">Purpose</a></li>
-                            <li><a class="text-muted" href="#">FAQ</a></li>
-                        </ul>
                     </div>
                 </div>
             </footer>
@@ -53,26 +34,6 @@
     }
 </script>
 <style>
-    html {
-        font-size: 14px;
-    }
 
-    @media (min-width: 768px) {
-        html {
-            font-size: 16px;
-        }
-    }
-
-    .container {
-        max-width: 960px;
-    }
-
-    .border-top {
-        border-top: 1px solid #e5e5e5;
-    }
-
-    .border-bottom {
-        border-bottom: 1px solid #e5e5e5;
-    }
 
 </style>

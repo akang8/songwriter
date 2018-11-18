@@ -77,3 +77,106 @@
         text-overflow: ellipsis;
     }
 }
+
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+div.header {
+    background-color: #336699;
+}
+
+    div.header a, div.header a:visited, div.header a:hover, div.header a:active {
+        color: #fff;
+    }
+
+.container {
+    max-width: 960px;
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #3973ac;
+    border-color: #2d5986;
+}
+
+a {
+    color: #336699;
+}
+
+div.folder-container {
+    border: 1px solid #ddd;
+    border-right: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+
+div.CodeMirror {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+div.full-screen-editor div.CodeMirror {
+    height: auto;
+}
+
+.cm-marker-annotation {
+    color: #c3a0a0;
+}
+
+.cm-marker-chord {
+    color: #88b388;
+}
+
+.cm-marker-lyric {
+    color: #b2b2d2;
+}
+
+.cm-start-annotation {
+    color: #b22222;
+    background-color: #c3a0a0
+}
+
+.cm-start-chord {
+    color: #0f860f;
+    background-color: #88b388;
+}
+
+.cm-start-lyric {
+    color: #00008b;
+    background-color: #b2b2d2;
+}
+
+
+.cm-annotation {
+    color: #b22222
+}
+
+.cm-chord {
+    color: #0f860f
+}
+
+.cm-lyric {
+    color: #00008b
+}
+
+.cm-section {
+    color: #777;
+}

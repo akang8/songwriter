@@ -1,17 +1,6 @@
 <template>
-    <div>
+    <div class="full-screen-editor">
         <codemirror v-model="wrappedValue" :options="editorOptions"></codemirror>
-        <p>
-            <span class="float-right">
-                <span class="text-secondary">
-                    <icon :icon="['fas', 'info-circle']" />
-                </span>
-                <span class="cm-section">[section]</span>
-                <span class="cm-annotation">!comment</span>
-                <span class="cm-chord">@chord</span>
-                <span class="cm-lyric">#lyric</span>
-            </span>
-        </p>
     </div>
 </template>
 <script>
@@ -32,7 +21,8 @@
                     tabSize: 4,
                     mode: 'songwriter',
                     lineNumbers: false,
-                    line: true
+                    line: true,
+                    viewportMargin: Infinity
                 }
             }
         },
@@ -49,7 +39,3 @@
     }
 </script>
 
-
-<style>
-
-</style>

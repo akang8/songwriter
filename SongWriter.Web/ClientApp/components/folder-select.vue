@@ -1,27 +1,27 @@
 <template>
-    <div class="form-group">
-        <label>Folder</label>
-        <div v-if="!creating">
-            <select v-model="selectedValue">
-                <option v-for="folder in folders" v-bind:value="folder.id">
-                    {{ folder.name }}
-                </option>
-            </select>
-            <a href="#" @click.prevent="creating = true">Create Folder</a>
+    <div v-if="!isCreating" class="input-group">
+        <select class="custom-select" v-model="selectedValue">
+            <option v-for="folder in folders" v-bind:value="folder.id">
+                {{ folder.name }}
+            </option>
+        </select>
+        <div class="input-group-append">
+            <a href="#" v-if="!isCreating" @click.prevent="isCreating = true" class="btn btn-outline-primary">Create Folder</a>
         </div>
-        <span v-else class="form-inline">
-            New Folder: <input type="text" class="form-control" v-model="newFolderName" />
-            <a href="#" class="btn btn-primary btn-sm" @click.prevent="createFolder">OK</a>
-            <a href="#" class="btn btn-warning btn-sm" @click.prevent="creating = false">Cancel</a>
-        </span>
-
+    </div>
+    <div v-else class="input-group">
+        <input type="text" class="form-control" v-model="newFolderName" placeholder="[New Folder Name]" aria-label="New Folder Name">
+        <div class="input-group-append">
+            <a href="#" class="btn btn-outline-success" @click.prevent="createFolder">OK</a>
+            <a href="#" class="btn btn-outline-secondary" @click.prevent="isCreating = false">Cancel</a>
+        </div>
     </div>
 </template>
 <script>
     export default {
         data() {
             return {
-                creating: false,
+                isCreating: false,
                 newFolderName: ''
             }
         },
@@ -33,6 +33,7 @@
                     if (result && result.data) {
                         // Update folders
                         await this.$store.dispatch("lookups/updateFolders");
+                        this.$toasted.global.actionSuccess({ message: 'Folder created' });
 
                         // Wait for UI and set value
                         this.$nextTick(() => {
@@ -44,10 +45,18 @@
                     console.log(err)
                 }
 
-                this.creating = false;
+                this.isCreating = false;
             }
         },
         computed: {
+            fieldLabel() {
+                if (this.isCreating) {
+                    return "Choose New Folder"
+                }
+                else {
+                    return "Folder"
+                }
+            },
             folders() {
                 return this.$store.state.lookups.folders;
             },
