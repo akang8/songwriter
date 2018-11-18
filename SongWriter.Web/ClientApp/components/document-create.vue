@@ -1,7 +1,7 @@
 <template>
     <div>
         <router-link :to="{ name: 'Home' }">Home</router-link>
-        <h1>Create Song</h1>
+        <h2>Create Document</h2>
         <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" v-model="model.name" />

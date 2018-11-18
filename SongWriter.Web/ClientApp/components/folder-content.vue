@@ -1,5 +1,6 @@
 <template>
     <div>
+        <router-link :to="{ name: 'Home' }">Home</router-link>
         <p>
             <a href="#" @click.prevent="createSong" class="btn btn-primary"><icon :icon="['fas', 'plus-square']" /> Add Document</a>
         </p>

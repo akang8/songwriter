@@ -1,9 +1,9 @@
 <template>
     <div v-if="model">
         <router-link :to="{ name: 'Home' }">Home</router-link>
-        <h1 v-once>
-            {{model.name}}
-        </h1>
+        <h2>
+            Edit Document
+        </h2>
         <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" v-model="model.name" />
