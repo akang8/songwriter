@@ -16,6 +16,7 @@ fontawesome.library.add(
     require('@fortawesome/fontawesome-free-solid/faFolder'),
     require('@fortawesome/fontawesome-free-solid/faInfoCircle'),
     require('@fortawesome/fontawesome-free-solid/faExpandArrowsAlt'),
+    require('@fortawesome/fontawesome-free-solid/faCompress'),
     // Brands
     require('@fortawesome/fontawesome-free-brands/faFontAwesome'),
     require('@fortawesome/fontawesome-free-brands/faVuejs')

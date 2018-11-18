@@ -21,7 +21,8 @@
                     tabSize: 4,
                     mode: 'songwriter',
                     lineNumbers: false,
-                    line: true
+                    line: true,
+                    viewportMargin: Infinity
                 }
             }
         },
