@@ -74,8 +74,9 @@
             },
             async saveDocument() {
                 try {
-                    var result = await this.$http.put(`document`, this.model)
+                    var result = await this.$http.put('document', this.model)
                     if (result) {
+                        this.$toasted.global.actionSuccess({ message: 'Document saved' });
                     }
                 } catch (err) {
                     window.alert(err)

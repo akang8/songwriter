@@ -46,6 +46,8 @@
                 try {
                     var result = await this.$http.post('document', this.model)
                     if (result && result.data) {
+                        this.$toasted.global.actionSuccess({ message: 'Document created' });
+
                         this.$router.push({
                             name: 'DocumentEdit',
                             params: {

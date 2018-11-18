@@ -33,6 +33,7 @@
                     if (result && result.data) {
                         // Update folders
                         await this.$store.dispatch("lookups/updateFolders");
+                        this.$toasted.global.actionSuccess({ message: 'Folder created' });
 
                         // Wait for UI and set value
                         this.$nextTick(() => {
