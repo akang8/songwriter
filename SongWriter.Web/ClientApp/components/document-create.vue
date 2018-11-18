@@ -10,7 +10,12 @@
             <label>Text</label>
             <text-editor v-model="model.text"></text-editor>
         </div>
-        <folder-select v-model="model.folderId"></folder-select>
+        <div class="form-row">
+            <div class="form-group col-lg-5 col-md-7 col-sm-12">
+                <label>Folder</label>
+                <folder-select v-model="model.folderId"></folder-select>
+            </div>
+        </div>
         <p>
             <a href="#" @click.prevent="createSong" class="btn btn-primary">Create Song</a>
         </p>
